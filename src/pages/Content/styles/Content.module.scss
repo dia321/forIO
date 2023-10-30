@@ -1,5 +1,6 @@
 @import '../../../components/NavBar.module.scss';
 @import '../../../components/SideMenu.module.scss';
+@import '../../../styles/mixin';
 
 $card-height: 290px;
 
@@ -67,6 +68,31 @@ $card-height: 290px;
       word-spacing: -3px;
       .title {
         @apply text-black text-base;
+      }
+    }
+  }
+}
+
+@include media(mobile, tablet) {
+  .content-wrapper {
+    @apply pl-0;
+    &.expanded {
+      @apply pl-0;
+    }
+    .content {
+      @apply grid-cols-2;
+    }
+  }
+}
+
+@include media(mobile) {
+  .content-wrapper {
+    .content {
+      @apply grid-cols-1 px-0;
+      .card {
+        .thumbnail {
+          @apply rounded-none;
+        }
       }
     }
   }

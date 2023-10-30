@@ -53,12 +53,9 @@ $hover-background-color: rgba(0, 0, 0, 0.1);
         width: calc($searchInputWidth + $clicked);
         border: 1px solid #065fd4;
       }
-      .search-icon {
-        color: #030303;
-        padding: 0 10px 0 0;
-        @apply self-center;
+      .search-icon-container {
         &.front {
-          @apply float-left hidden;
+          @apply hidden pr-2;
         }
         &[data-focused='true'] {
           @apply block;
@@ -109,13 +106,16 @@ $hover-background-color: rgba(0, 0, 0, 0.1);
     > :nth-child(2) {
       @apply mr-2;
     }
-    .new-video-container,
-    .notification-container {
+    .new-video-icon-container,
+    .notification-icon-container {
       height: 40px;
       &:hover {
         background-color: $hover-background-color;
         border-radius: 24px;
       }
+    }
+    .responsive-search-container {
+      @apply hidden;
     }
     .red {
       @apply text-white rounded-full text-xs absolute text-center;
@@ -140,4 +140,30 @@ $hover-background-color: rgba(0, 0, 0, 0.1);
 }
 
 @include media(mobile, tablet) {
+  .nav-bar {
+    .partition {
+      .burger-container {
+        @apply hidden;
+      }
+      .search-container {
+        @apply hidden;
+      }
+      &.shortcut-container {
+        .new-video-container {
+          @apply hidden;
+        }
+        .notification-icon-container:hover {
+          background-color: unset;
+        }
+        .user-container {
+          @apply hidden;
+        }
+        .responsive-search-container {
+          @apply flex align-middle;
+          height: 40px;
+          width: 36px;
+        }
+      }
+    }
+  }
 }

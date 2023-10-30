@@ -8,23 +8,11 @@ import SpeackIcon from '../assets/speak-icon.svg?react';
 import NewVideoIcon from '../assets/new-video-icon.svg?react';
 import NotificationIcon from '../assets/notification-icon.svg?react';
 
-import styled from 'styled-components';
 import styles from './NavBar.module.scss';
 
 import Tooltip from './Tooltip';
 import { layoutState as loState } from '@stores/layout';
 import { useRecoilState } from 'recoil';
-
-const NavBarArea = styled.div``;
-const Partition = styled.div``;
-const BurgerContainer = styled.div``;
-const SearchContainer = styled.div``;
-const SearchInputContainer = styled.div``;
-const SearchButtonContainer = styled.div``;
-const SpeakContainer = styled.div``;
-const NewVidContainer = styled.div``;
-const NotificationContainer = styled.div``;
-const UserContainer = styled.div``;
 
 interface EventTargetWithId extends EventTarget {
   id: string;
@@ -74,10 +62,11 @@ export const NavBar = () => {
   };
   const handleNotificationClick: React.MouseEventHandler = (e) => {
     e.stopPropagation();
-    setLayoutState((prev) => ({
-      ...prev,
-      notificationPopupVisible: !prev.notificationPopupVisible
-    }));
+    if (layoutState.size === 'pc')
+      setLayoutState((prev) => ({
+        ...prev,
+        notificationPopupVisible: !prev.notificationPopupVisible
+      }));
   };
   useEffect(() => {
     // 컴포넌트가 마운트될 때 document에 클릭 이벤트 리스너 추가
@@ -90,28 +79,32 @@ export const NavBar = () => {
   }, []);
   return (
     <>
-      <NavBarArea className={styles['nav-bar']}>
-        <Partition className={styles['partition']}>
-          <BurgerContainer className={`${styles['burger-container']}`} onClick={handleMenuClick}>
-            <BurgerIcon className={styles['burger-menu']} />
-          </BurgerContainer>
+      <div className={styles['nav-bar']}>
+        <div className={styles['partition']}>
+          <div className={`${styles['burger-container']}`} onClick={handleMenuClick}>
+            <div className={styles['burger-menu']}>
+              <BurgerIcon />
+            </div>
+          </div>
           <div className="flex cursor-pointer">
             <img src={smPhoto} className={styles['photo']} />
             <NameLogo />
             <span className={styles['korea']}>KR</span>
           </div>
-        </Partition>
-        <Partition className={styles['partition']}>
-          <SearchContainer className={styles['search-container']} onClick={() => setFocused(true)}>
-            <SearchInputContainer
+        </div>
+        <div className={styles['partition']}>
+          <div className={styles['search-container']} onClick={() => setFocused(true)}>
+            <div
               className={styles['search-input-container']}
               data-focused={focused}
               id="search-input-area"
             >
-              <SearchIcon
-                className={`${styles['search-icon']} ${styles['front']}`}
+              <div
+                className={`${styles['search-icon-container']} ${styles['front']}`}
                 data-focused={focused}
-              />
+              >
+                <SearchIcon />
+              </div>
               <div className="flex w-full justify-between">
                 <input
                   className={styles['search-input']}
@@ -128,20 +121,19 @@ export const NavBar = () => {
                   />
                 </a>
               </div>
-            </SearchInputContainer>
-            <SearchButtonContainer
+            </div>
+            <div
               className={styles['search-button-container']}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
               id="search"
             >
-              <SearchIcon
-                className={`${styles['search-icon']} ${styles['back']}`}
-                data-focused={focused}
-              />
+              <div className={`${styles['search-icon-container']}`}>
+                <SearchIcon />
+              </div>
               <Tooltip content="검색" visible={tooltipVisible.search} />
-            </SearchButtonContainer>
-            <SpeakContainer>
+            </div>
+            <div>
               <div
                 className={`${styles['speak-icon-container']}`}
                 onMouseEnter={handleMouseEnter}
@@ -151,36 +143,45 @@ export const NavBar = () => {
                 <SpeackIcon />
               </div>
               <Tooltip content="음성으로 검색" visible={tooltipVisible.speak} />
-            </SpeakContainer>
-          </SearchContainer>
-        </Partition>
-        <Partition className={`${styles['partition']} ${styles['shortcut-container']}`}>
-          <NewVidContainer
+            </div>
+          </div>
+        </div>
+        <div className={`${styles['partition']} ${styles['shortcut-container']}`}>
+          <div
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             id="newVid"
             onClick={() => alert('soon')}
+            className={styles['new-video-container']}
           >
-            <div className={styles['new-video-container']}>
+            <div className={styles['new-video-icon-container']}>
               <NewVideoIcon />
             </div>
             <Tooltip content="만들기" visible={tooltipVisible.newVid} />
-          </NewVidContainer>
-          <NotificationContainer
+          </div>
+          <div
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             id="notification"
             onClick={handleNotificationClick}
+            className={styles['notification-container']}
           >
-            <div className={styles['notification-container']}>
+            <div className={styles['notification-icon-container']}>
               <NotificationIcon />
             </div>
             <span className={styles['red']}>2</span>
-            <Tooltip content="알림" visible={tooltipVisible.notification} />
-          </NotificationContainer>
-          <UserContainer className={styles['user-container']}>b</UserContainer>
-        </Partition>
-      </NavBarArea>
+            {layoutState.size === 'pc' && (
+              <Tooltip content="알림" visible={tooltipVisible.notification} />
+            )}
+          </div>
+          <div className={styles['user-container']}>b</div>
+          <div className={styles['responsive-search-container']}>
+            <div className={styles['responsive-search-icon-container']}>
+              <SearchIcon />
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

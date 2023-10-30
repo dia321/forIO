@@ -5,7 +5,7 @@ $shrinked-menu-width: 64px;
 $mobile-menu-height: 48px;
 
 .side-menu {
-  @apply fixed;
+  @apply fixed bg-white;
   top: $navbar-height;
   width: $shrinked-menu-width;
   height: calc(100vh - $navbar-height);
@@ -58,6 +58,14 @@ $mobile-menu-height: 48px;
       }
       &:hover {
         background-color: unset;
+      }
+    }
+    &.expanded {
+      .menu-container {
+        @apply flex-col;
+        .menu-tab {
+          @apply pl-0 text-xs;
+        }
       }
     }
   }
