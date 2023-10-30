@@ -1,0 +1,38 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+// @keyframes fadeOut {
+//   0% {
+//     opacity: 1;
+//   }
+
+//   100% {
+//     opacity: 0;
+//   }
+// }
+
+.tooltip-container {
+  border-radius: 4px;
+  font-size: 12px;
+  position: absolute;
+  outline: none;
+  z-index: 1002;
+  background-color: #616161;
+  color: white;
+  padding: 8px;
+  transform: translateX(0%);
+  &.fade-in {
+    @apply opacity-100 block;
+    animation: fadeIn ease-in-out 300ms;
+  }
+  &.fade-out {
+    @apply hidden opacity-0;
+    // animation: fadeOut ease-in-out 100ms;
+  }
+}

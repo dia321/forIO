@@ -1,0 +1,19 @@
+$notification-popup-width: 480px;
+$notification-popup-height: 480px;
+
+.wrapper {
+  @apply bg-white block;
+  box-shadow: 0px 4px 32px 0px rgb(0, 0, 0, 0.1);
+  outline: none;
+  z-index: 2202;
+  position: fixed;
+  top: 48px;
+  right: 75px;
+  border-radius: 12px;
+  width: $notification-popup-width;
+  height: $notification-popup-height;
+}
+
+.header {
+  @apply py-3 px-5 border-b;
+}

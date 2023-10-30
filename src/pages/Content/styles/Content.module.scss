@@ -1,0 +1,73 @@
+@import '../../../components/NavBar.module.scss';
+@import '../../../components/SideMenu.module.scss';
+
+$card-height: 290px;
+
+.content-wrapper {
+  @apply w-full;
+  padding-top: $navbar-height;
+  padding-left: $shrinked-menu-width;
+  &.expanded {
+    padding-left: $expanded-menu-width;
+  }
+}
+
+.content {
+  @apply px-8 py-4 grid grid-cols-3 gap-8;
+}
+
+.card {
+  @apply w-full cursor-pointer;
+  height: 290px;
+  &:hover {
+    .thumbnail {
+      background-color: #efefef;
+    }
+  }
+  .thumbnail {
+    height: calc($card-height * 2 / 3);
+    border-radius: 12px;
+    background-color: #fafafa;
+    @apply flex justify-center items-center;
+    .img-container {
+      height: 100px;
+      width: 100px;
+      img {
+        @apply w-full h-full;
+      }
+    }
+  }
+  .card-content {
+    @apply flex p-1;
+    height: calc($card-height / 3);
+    .sticker-area {
+      @apply flex justify-center pt-1;
+      .sticker-container {
+        @apply flex rounded-full p-1;
+        height: 36px;
+        width: 36px;
+        &.profile {
+          background-color: rgb(201, 190, 190);
+        }
+        &.skill {
+          background-color: rgb(181, 184, 219);
+        }
+        &.project {
+          background-color: orange;
+        }
+        &.toy {
+          border: 1px solid black;
+        }
+      }
+    }
+    .description {
+      @apply px-3 text-sm;
+      --tw-text-opacity: 0.9;
+      color: rgb(75 85 99 / var(--tw-text-opacity));
+      word-spacing: -3px;
+      .title {
+        @apply text-black text-base;
+      }
+    }
+  }
+}

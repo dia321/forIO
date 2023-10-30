@@ -1,0 +1,64 @@
+@import '../styles/mixin';
+@import 'NavBar.module';
+$expanded-menu-width: 240px;
+$shrinked-menu-width: 64px;
+$mobile-menu-height: 48px;
+
+.side-menu {
+  @apply fixed;
+  top: $navbar-height;
+  width: $shrinked-menu-width;
+  height: calc(100vh - $navbar-height);
+  .menu-container {
+    @apply flex flex-col whitespace-nowrap rounded-xl items-center mr-4 cursor-pointer p-3;
+    width: $shrinked-menu-width;
+    &[data-selected='true'] {
+      background-color: $basic-background-color;
+    }
+    &:hover {
+      background-color: $hover-background-color;
+    }
+    .icon-wrapper {
+      // width: 40px;
+      @apply py-2;
+    }
+    .icon-container {
+      height: 24px;
+      width: 24px;
+    }
+
+    .menu-tab {
+      @apply text-xs;
+    }
+  }
+  &.expanded {
+    .menu-container {
+      @apply ml-3;
+      height: 40px;
+      width: $expanded-menu-width;
+      @apply flex-row;
+      .menu-tab {
+        @apply pl-4 text-sm;
+      }
+    }
+  }
+}
+
+@include media(mobile, tablet) {
+  .side-menu {
+    @apply flex justify-between;
+    top: unset;
+    bottom: 0;
+    width: 100vw;
+    height: 64px;
+    .menu-container {
+      @apply flex flex-col  whitespace-nowrap rounded-xl items-center mr-4 cursor-pointer p-1;
+      &[data-selected='true'] {
+        background-color: unset;
+      }
+      &:hover {
+        background-color: unset;
+      }
+    }
+  }
+}
