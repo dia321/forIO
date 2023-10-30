@@ -92,51 +92,50 @@ $hover-background-color: rgba(0, 0, 0, 0.1);
       }
     }
   }
-}
-
-.speak-icon-container {
-  @apply cursor-pointer mx-3;
-  background-color: $basic-background-color;
-  border-radius: 24px;
-  height: 40px;
-  &:hover {
-    background-color: $hover-background-color;
-  }
-}
-.shortcut-container {
-  @apply cursor-pointer;
-  > div {
-    @apply ml-2;
-  }
-  > :nth-child(2) {
-    @apply mr-2;
-  }
-  .new-video-container,
-  .notification-container {
+  .speak-icon-container {
+    @apply cursor-pointer mx-3;
+    background-color: $basic-background-color;
+    border-radius: 24px;
     height: 40px;
     &:hover {
       background-color: $hover-background-color;
-      border-radius: 24px;
     }
   }
-  .red {
-    @apply text-white rounded-full text-xs absolute text-center;
-    font-weight: 400;
-    min-width: 8px;
-    max-width: 18px;
-    height: 18px;
-    background-color: #c00;
-    padding: 0 4px;
-    border: 2px solid white;
-    transform: translateX(110%);
-    top: 20%;
-  }
-  .user-container {
-    @apply text-white text-xl leading-9 mx-2 text-center;
-    height: 40px;
-    width: 40px;
-    border-radius: 24px;
-    background-color: rgb(105, 3, 173);
+  .shortcut-container {
+    @apply cursor-pointer;
+    > div {
+      @apply ml-2;
+    }
+    > :nth-child(2) {
+      @apply mr-2;
+    }
+    .new-video-container,
+    .notification-container {
+      height: 40px;
+      &:hover {
+        background-color: $hover-background-color;
+        border-radius: 24px;
+      }
+    }
+    .red {
+      @apply text-white rounded-full text-xs absolute text-center;
+      font-weight: 400;
+      min-width: 8px;
+      max-width: 18px;
+      height: 18px;
+      background-color: #c00;
+      padding: 0 4px;
+      border: 2px solid white;
+      transform: translateX(110%);
+      top: 20%;
+    }
+    .user-container {
+      @apply text-white text-xl leading-9 mx-2 text-center;
+      height: 40px;
+      width: 40px;
+      border-radius: 24px;
+      background-color: rgb(105, 3, 173);
+    }
   }
 }
 
