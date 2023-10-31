@@ -28,7 +28,7 @@ $mobile-menu-height: 48px;
     }
 
     .menu-tab {
-      @apply text-xs;
+      @apply text-xs text-black;
     }
   }
   &.expanded {

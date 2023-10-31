@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import styles from './SideMenu.module.scss';
 import HomeIcon from '../assets/home-icon.svg?react';
-import HomeIconUnfocused from '../assets/home-icon-unfocused.svg?react';
+import HomeBlackIcon from '../assets/home-black-icon.svg?react';
 import ShortsIcon from '../assets/shorts-icon.svg?react';
+import ShortsBlackIcon from '../assets/shorts-black-icon.svg?react';
 import SubscribeIcon from '../assets/subscribe-icon.svg?react';
+import SubscribeBlackIcon from '../assets/subscribe-black-icon.svg?react';
 import { useState } from 'react';
-import { layoutState as loState } from '@stores/layout';
-import { useRecoilValue } from 'recoil';
 
 interface SideMenuProps {
   expanded: boolean;
@@ -18,7 +18,7 @@ const IconWrapper = styled.div``;
 
 export const SideMenu = (sideMenuProps: SideMenuProps) => {
   const { expanded = true } = sideMenuProps;
-  const layoutState = useRecoilValue(loState);
+
   const menuList = [
     { menu: 'home', name: '홈' },
     { menu: 'shorts', name: 'Shorts' },
@@ -53,15 +53,25 @@ export const SideMenu = (sideMenuProps: SideMenuProps) => {
           <IconWrapper className={styles['icon-wrapper']}>
             <IconContainer className={styles['icon-container']}>
               {_.menu === 'home' ? (
-                selected[_.menu] || layoutState.size === 'laptop' ? (
-                  <HomeIcon />
+                selected['home'] ? (
+                  <HomeBlackIcon />
                 ) : (
-                  <HomeIconUnfocused />
+                  <HomeIcon />
                 )
               ) : _.menu === 'shorts' ? (
-                <ShortsIcon />
+                selected['shorts'] ? (
+                  <ShortsBlackIcon />
+                ) : (
+                  <ShortsIcon />
+                )
+              ) : _.menu === 'subscribe' ? (
+                selected['subscribe'] ? (
+                  <SubscribeBlackIcon />
+                ) : (
+                  <SubscribeIcon />
+                )
               ) : (
-                <SubscribeIcon />
+                ''
               )}
             </IconContainer>
           </IconWrapper>
