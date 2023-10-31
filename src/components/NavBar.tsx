@@ -42,7 +42,6 @@ export const NavBar = () => {
   };
   const handleMouseLeave: React.MouseEventHandler = (e) => {
     const { id } = e.currentTarget as EventTargetWithId;
-    console.log(id, e.type);
     setTooltipVisible({ ...tooltipVisible, [id]: false });
   };
 
@@ -62,11 +61,10 @@ export const NavBar = () => {
   };
   const handleNotificationClick: React.MouseEventHandler = (e) => {
     e.stopPropagation();
-    if (layoutState.size === 'pc')
-      setLayoutState((prev) => ({
-        ...prev,
-        notificationPopupVisible: !prev.notificationPopupVisible
-      }));
+    setLayoutState((prev) => ({
+      ...prev,
+      notificationPopupVisible: !prev.notificationPopupVisible
+    }));
   };
   useEffect(() => {
     // 컴포넌트가 마운트될 때 document에 클릭 이벤트 리스너 추가
@@ -170,7 +168,7 @@ export const NavBar = () => {
               <NotificationIcon />
             </div>
             <span className={styles['red']}>2</span>
-            {layoutState.size === 'pc' && (
+            {layoutState.size === 'laptop' && (
               <Tooltip content="알림" visible={tooltipVisible.notification} />
             )}
           </div>

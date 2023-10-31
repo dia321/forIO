@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import s from './NotificationPopup.module.scss';
 import { layoutState as loState } from '@stores/layout';
 import { useRecoilState } from 'recoil';
+import XButtonBlackIcon from '@assets/x-button-black-icon.svg?react';
 
 export const NotificationPopup = () => {
   const [layoutState, setLayoutState] = useRecoilState(loState);
@@ -30,7 +31,15 @@ export const NotificationPopup = () => {
   }, []);
   return (
     <div ref={popupRef} className={`${s['wrapper']}`}>
-      <div className={s['header']}>알림</div>
+      <div className={s['header']}>
+        <span>알림</span>
+        <div
+          className={s['x-button-container']}
+          onClick={() => setLayoutState((prev) => ({ ...prev, notificationPopupVisible: false }))}
+        >
+          <XButtonBlackIcon />
+        </div>
+      </div>
     </div>
   );
 };

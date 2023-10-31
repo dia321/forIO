@@ -1,6 +1,7 @@
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import s from '../styles/Content.module.scss';
 import { layoutState as loState } from '@stores/layout';
+import { contentState as ctState } from '@stores/content';
 
 import profileImage from '@assets/profile-image.png';
 import UserIcon from '@assets/user-icon.svg?react';
@@ -10,6 +11,7 @@ import projectImage from '@assets/project-image.png';
 import ProjectIcon from '@assets/project-icon.svg?react';
 import toyProjectImage from '@assets/toy-project-image.png';
 import ToyProjectIcon from '@assets/toy-project-icon.svg?react';
+import { Player } from './Player';
 
 const Content = () => {
   const contentList = [
@@ -19,12 +21,17 @@ const Content = () => {
     { content: 'toy', name: '개인 프로젝트' }
   ];
   const layoutState = useRecoilValue(loState);
+  const [contentState, setContentState] = useRecoilState(ctState);
 
   return (
     <div className={`${s['content-wrapper']} ${layoutState.sideMenuExpanded && s['expanded']}`}>
       <div className={s['content']}>
         {contentList.map((c, i) => (
-          <div className={s['card']} key={`_${i}`}>
+          <div
+            className={s['card']}
+            key={`_${i}`}
+            onClick={() => setContentState((prev) => ({ ...prev, visible: true, appear: true }))}
+          >
             <div className={s['thumbnail']}>
               <div className={s['img-container']}>
                 <img
@@ -82,6 +89,7 @@ const Content = () => {
           </div>
         ))}
       </div>
+      {contentState.appear && <Player />}
     </div>
   );
 };

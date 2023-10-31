@@ -1,0 +1,85 @@
+@import '../../../styles/mixin';
+
+$laptop-height: 90%;
+$other-height: 100%;
+
+@keyframes popin {
+  0% {
+    @apply w-0 h-0;
+  }
+}
+@keyframes popout {
+  100% {
+    @apply w-0 h-0;
+  }
+}
+
+.player-area {
+  @apply fixed top-0 left-0 h-full w-full flex justify-center items-center;
+  background-color: rgb(#333333, 0.8);
+  &.pop-out {
+    .player-wrapper {
+      animation: popout ease 500ms;
+      .x-button-container {
+        @apply hidden;
+      }
+    }
+  }
+  .player-wrapper {
+    @apply rounded-lg flex flex-col;
+    background-color: white;
+    height: 90%;
+    width: 70%;
+    animation: popin ease 500ms;
+    .video {
+      @apply rounded-lg w-full;
+      background-color: rgb(#111, 0.5);
+      height: 60%;
+    }
+    .description {
+      height: 10%;
+    }
+    .info {
+      @apply rounded-lg;
+      height: 30%;
+      background-color: #eee;
+    }
+    .x-button-container {
+      @apply absolute self-end pr-3 pt-3 cursor-pointer;
+      width: 36px;
+      height: 36px;
+    }
+  }
+}
+
+@include media(tablet, mobile) {
+  .player-area {
+    .player-wrapper {
+      @apply h-full;
+
+      .x-button-container {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+}
+
+@include media(mobile) {
+  .player-area {
+    @apply block;
+    .player-wrapper {
+      @apply w-full h-full rounded-none;
+      .video {
+        @apply rounded-none;
+      }
+      .info {
+        @apply rounded-none;
+      }
+      .x-button-container {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+}

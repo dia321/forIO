@@ -1,9 +1,8 @@
-import { RecoilRoot, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 
 import './App.css';
 import { AppRouter } from './AppRouter';
 import { YoutubeLayout } from '@component/templates/YoutubeLayout';
-import Content from './pages/Content/components/Content';
 import { useEffect } from 'react';
 import { layoutState as loState } from '@stores/layout';
 
@@ -20,17 +19,16 @@ function App() {
         } else if (window.innerWidth < 586) {
           setLayoutState((prev) => ({ ...prev, size: 'mobile' }));
         } else {
-          setLayoutState((prev) => ({ ...prev, size: 'pc' }));
+          setLayoutState((prev) => ({ ...prev, size: 'laptop' }));
         }
       }, 100);
     });
   }, []);
   return (
-    <RecoilRoot>
+    <>
       <YoutubeLayout />
-      <Content />
       <AppRouter />
-    </RecoilRoot>
+    </>
   );
 }
 
