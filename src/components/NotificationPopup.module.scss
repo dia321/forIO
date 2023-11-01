@@ -1,9 +1,12 @@
 @import '../styles/mixin';
-$notification-popup-width: 360px;
+@import './SideMenu.module.scss';
+@import './NavBar.module.scss';
+$notification-popup-width: 400px;
 $notification-popup-height: 480px;
 
 .wrapper {
-  @apply bg-white block;
+  @apply block;
+  background-color: #fff;
   box-shadow: 0px 4px 32px 0px rgb(0, 0, 0, 0.1);
   outline: none;
   z-index: 2202;
@@ -13,6 +16,79 @@ $notification-popup-height: 480px;
   border-radius: 12px;
   width: $notification-popup-width;
   height: $notification-popup-height;
+  .not-container {
+    @apply flex cursor-pointer w-full;
+    padding: 16px 16px 16px 0;
+    &:hover {
+      background-color: $basic-background-color;
+      .three-dot-wrapper {
+        @apply visible;
+      }
+      &:has(.menu-wrapper:hover) {
+        background-color: unset;
+      }
+    }
+    .dot {
+      @apply rounded-full;
+      background-color: #065fd4;
+      width: 1%;
+      height: 4px;
+      margin: 22px 6px 0;
+    }
+    .sticker-area {
+      @apply mr-4;
+      width: 48px;
+      height: 48px;
+      .sticker-container {
+        @apply h-full w-full;
+      }
+      .photo {
+        @apply rounded-full w-full h-full;
+      }
+    }
+    .description {
+      width: 77%;
+      .content {
+        @apply mb-2 overflow-hidden text-ellipsis;
+      }
+      .date {
+        @apply text-xs font-normal;
+        color: #606060;
+      }
+    }
+    .three-dot-wrapper {
+      @apply invisible -translate-y-1 rounded-full right-0 ml-2 z-10;
+      min-width: 9%;
+      height: 36px;
+      padding: 8px;
+      border: 1px solid transparent;
+      &.clicked {
+        @apply visible;
+        animation:
+          clicked-background linear 500ms,
+          clicked-border ease 1000ms;
+      }
+      .three-dot-container {
+        @apply w-full;
+      }
+    }
+    .menu-wrapper {
+      @apply absolute rounded-lg bg-white right-4 translate-y-9 py-2 z-20;
+      box-shadow: 0px 4px 32px 0px rgb(0, 0, 0, 0.1);
+      width: 240px;
+      .menu-container {
+        @apply px-3 flex py-1;
+        &:hover {
+          background-color: rgb(0, 0, 0, 0.1);
+        }
+        .icon {
+          @apply mr-4;
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+  }
 }
 
 .header {
@@ -26,12 +102,35 @@ $notification-popup-height: 480px;
 
 @include media(tablet, mobile) {
   .wrapper {
-    @apply h-full top-0 right-0;
+    @apply top-0 right-0;
+    height: calc(100vh - $mobile-menu-height);
+    max-height: 480px;
   }
 }
 
 @include media(mobile) {
   .wrapper {
     @apply w-full h-full rounded-none;
+  }
+}
+
+@keyframes clicked-background {
+  0% {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  100% {
+    background-color: unset;
+  }
+}
+@keyframes clicked-border {
+  0% {
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    border-color: rgba(0, 0, 0, 0.075);
+    // border-color: red;
+  }
+  100% {
+    border-color: none;
   }
 }

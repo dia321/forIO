@@ -3,3 +3,7 @@ export interface DataPoint {
   value: number;
 }
 export type DataPoints = DataPoint[];
+
+export interface EventTargetWithId extends EventTarget {
+  id: string;
+}

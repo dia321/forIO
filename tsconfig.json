@@ -27,7 +27,8 @@
       "@api/*": ["src/api/*"],
       "@stores/*": ["src/stores/*"],
       "@component/*": ["src/components/*"],
-      "@assets/*": ["src/assets/*"]
+      "@assets/*": ["src/assets/*"],
+      "@type": ["src/@type"]
     }
   },
   "include": ["src", "stores/dog"],
