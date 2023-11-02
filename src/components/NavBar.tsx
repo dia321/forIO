@@ -11,8 +11,8 @@ import NotificationIcon from '../assets/notification-icon.svg?react';
 import styles from './NavBar.module.scss';
 
 import Tooltip from './Tooltip';
-import { layoutState as loState } from '@stores/layout';
-import { useRecoilState } from 'recoil';
+import { layoutState as loState, notificationState } from '@stores/layout';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 interface EventTargetWithId extends EventTarget {
   id: string;
@@ -27,6 +27,8 @@ export const NavBar = () => {
     notification: false
   });
   const [layoutState, setLayoutState] = useRecoilState(loState);
+  const [noteCountState, setNoteCountState] = useState(0);
+  const noteState = useRecoilValue(notificationState);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const handleMouseEnter: React.MouseEventHandler = (e) => {
@@ -75,6 +77,11 @@ export const NavBar = () => {
       document.removeEventListener('click', handleInputClick);
     };
   }, []);
+  useEffect(() => {
+    let count = 0;
+    for (const n of noteState.note) if (n.on) count++;
+    setNoteCountState(count);
+  }, [noteState]);
   return (
     <>
       <div className={styles['nav-bar']}>
@@ -167,7 +174,7 @@ export const NavBar = () => {
             <div className={styles['notification-icon-container']}>
               <NotificationIcon />
             </div>
-            <span className={styles['red']}>2</span>
+            {noteCountState > 0 && <span className={styles['red']}>{noteCountState}</span>}
             {layoutState.size === 'laptop' && (
               <Tooltip content="알림" visible={tooltipVisible.notification} />
             )}

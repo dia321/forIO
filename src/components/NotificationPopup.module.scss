@@ -30,10 +30,12 @@ $notification-popup-height: 480px;
     }
     .dot {
       @apply rounded-full;
-      background-color: #065fd4;
       width: 1%;
       height: 4px;
       margin: 22px 6px 0;
+      &.blue {
+        background-color: #065fd4;
+      }
     }
     .sticker-area {
       @apply mr-4;

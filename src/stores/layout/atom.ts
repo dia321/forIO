@@ -16,3 +16,13 @@ export const layoutState = atom({
     size: 'laptop'
   }
 });
+
+export const notificationState = atom({
+  key: 'not',
+  default: {
+    note: [
+      { content: '???님이 좋아요를 눌렀습니다.', date: '1주 전', on: true },
+      { content: '김성민님이 정보처리기사 자격증을 획득하였습니다.', date: '2달 전', on: false }
+    ]
+  }
+});

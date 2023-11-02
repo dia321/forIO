@@ -1,43 +1,57 @@
 import { useEffect, useRef, useState } from 'react';
 import s from './NotificationPopup.module.scss';
-import { layoutState as loState } from '@stores/layout';
+import { layoutState as loState, notificationState } from '@stores/layout';
 import { useRecoilState } from 'recoil';
 import XButtonBlackIcon from '@assets/x-button-black-icon.svg?react';
 import smPhoto from '@assets/sm.jpg';
 import ThreeDotIcon from '@assets/three-dot-icon.svg?react';
 import EyeHideIcon from '@assets/eye-hide-icon.svg?react';
 import EyeIcon from '@assets/eye-icon.svg?react';
-import { EventTargetWithId } from 'src/@type';
+import { EventTargetWithId } from '@type';
 
 export const NotificationPopup = () => {
-  const [layoutState, setLayoutState] = useRecoilState(loState);
-  const notList = [
-    { content: '???님이 좋아요를 눌렀습니다.', date: '1주 전' },
-    { content: '김성민님이 정보처리기사 자격증을 획득하였습니다.', date: '2달 전' }
-  ];
+  const [, setLayoutState] = useRecoilState(loState);
+  const [noteState, setNoteState] = useRecoilState(notificationState);
   const [clicked, setClicked] = useState(-1);
   const popupRef = useRef<HTMLDivElement | null>(null);
+  const menuRef = useRef<HTMLDivElement | null>(null);
 
+  const handleMenuClick: React.MouseEventHandler = (e) => {
+    e.stopPropagation();
+    const { id } = e.currentTarget as EventTargetWithId;
+    setNoteState((prev) => ({
+      note: prev.note.map((n, idx) => {
+        if (String(idx) === id) return { ...n, on: !n.on };
+        else return n;
+      })
+    }));
+    setClicked(-1);
+  };
+  console.log(noteState);
   useEffect(() => {
-    // 이벤트 핸들러 함수를 만들어 배경을 클릭했을 때 팝업을 숨깁니다.
     const handleBackgroundClick = (e: MouseEvent) => {
       if (popupRef.current && !popupRef.current.contains(e.target as Node)) {
         setLayoutState((prev) => ({ ...prev, notificationPopupVisible: false }));
       }
     };
+    document.addEventListener('click', handleBackgroundClick);
 
-    // 배경 클릭 이벤트를 추가합니다.
-    if (layoutState.notificationPopupVisible) {
-      document.addEventListener('click', handleBackgroundClick);
-    } else {
-      document.removeEventListener('click', handleBackgroundClick);
-    }
-
-    // 컴포넌트가 언마운트될 때 이벤트 핸들러를 제거합니다.
     return () => {
       document.removeEventListener('click', handleBackgroundClick);
     };
   }, []);
+  useEffect(() => {
+    const handleMenuOffClick = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setClicked(-1);
+      }
+    };
+    document.addEventListener('click', handleMenuOffClick);
+
+    return () => {
+      document.removeEventListener('click', handleMenuOffClick);
+    };
+  }, [clicked >= 0]);
   return (
     <div ref={popupRef} className={`${s['wrapper']}`}>
       <div className={s['header']}>
@@ -49,9 +63,9 @@ export const NotificationPopup = () => {
           <XButtonBlackIcon />
         </div>
       </div>
-      {notList.map((_, i) => (
+      {noteState.note.map((_, i) => (
         <div className={s['not-container']} key={`-${i}`}>
-          <div className={s['dot']}></div>
+          <div className={`${s['dot']} ${_.on ? s['blue'] : ''}`}></div>
           <div className={s['sticker-area']}>
             <div className={s['sticker-container']}>
               <img src={smPhoto} className={s['photo']} />
@@ -63,25 +77,20 @@ export const NotificationPopup = () => {
           </div>
           <div
             className={`${s['three-dot-wrapper']} ${clicked === i ? s['clicked'] : ''}`}
-            onClick={() => setClicked(i)}
+            onClick={(e) => {
+              e.stopPropagation();
+              setClicked(i);
+            }}
           >
             <div className={s['three-dot-container']}>
               <ThreeDotIcon />
             </div>
           </div>
           {clicked === i && (
-            <div className={s['menu-wrapper']}>
-              <div className={s['menu-container']}>
-                <div className={s['icon']}>
-                  <EyeHideIcon />
-                </div>
-                <div>이 알림 숨기기</div>
-              </div>
-              <div className={s['menu-container']}>
-                <div className={s['icon']}>
-                  <EyeIcon />
-                </div>
-                <div>이 알림 보이기</div>
+            <div className={s['menu-wrapper']} ref={menuRef}>
+              <div className={s['menu-container']} id={`${i}`} onClick={handleMenuClick}>
+                <div className={s['icon']}>{_.on ? <EyeHideIcon /> : <EyeIcon />}</div>
+                <div>이 알림 {_.on ? '숨기기' : '보이기'}</div>
               </div>
             </div>
           )}
