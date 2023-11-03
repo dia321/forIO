@@ -33,4 +33,4 @@ const Tooltip = (props: TooltipProps) => {
   );
 };
 
-export default Tooltip;
+export { Tooltip };

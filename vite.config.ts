@@ -4,6 +4,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import { visualizer } from 'rollup-plugin-visualizer';
 // import { chunkSplitPlugin } from 'vite-plugin-chunk-split';
 import svgr from 'vite-plugin-svgr';
+import { resolve } from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -66,6 +67,11 @@ export default defineConfig({
           }
         }
       }
+    }
+  },
+  resolve: {
+    alias: {
+      '~': resolve(__dirname, 'src')
     }
   },
   cacheDir: './.vite',

@@ -1,7 +1,4 @@
-@import '../../../styles/mixin';
-
-$laptop-height: 90%;
-$other-height: 100%;
+@import '~/styles/mixin';
 
 @keyframes popin {
   0% {
@@ -15,7 +12,7 @@ $other-height: 100%;
 }
 
 .player-area {
-  @apply fixed top-0 left-0 h-full w-full flex justify-center items-center;
+  @apply fixed top-0 left-0 h-full w-full flex justify-center items-center z-20;
   background-color: rgb(#333333, 0.8);
   &.pop-out {
     .player-wrapper {

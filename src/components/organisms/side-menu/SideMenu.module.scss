@@ -1,8 +1,5 @@
-@import '../styles/mixin';
-@import 'NavBar.module';
-$expanded-menu-width: 240px;
-$shrinked-menu-width: 64px;
-$mobile-menu-height: 64px;
+@import '~/styles/mixin';
+@import '~/styles/variable';
 
 .side-menu {
   @apply fixed bg-white;

@@ -9,10 +9,11 @@ import EyeHideIcon from '@assets/eye-hide-icon.svg?react';
 import EyeIcon from '@assets/eye-icon.svg?react';
 import { EventTargetWithId } from '@type';
 
-export const NotificationPopup = () => {
+const NotificationPopup = () => {
   const [, setLayoutState] = useRecoilState(loState);
   const [noteState, setNoteState] = useRecoilState(notificationState);
   const [clicked, setClicked] = useState(-1);
+  const [animation, setAnimation] = useState(false);
   const popupRef = useRef<HTMLDivElement | null>(null);
   const menuRef = useRef<HTMLDivElement | null>(null);
 
@@ -76,10 +77,15 @@ export const NotificationPopup = () => {
             <div className={s['date']}>{_.date}</div>
           </div>
           <div
-            className={`${s['three-dot-wrapper']} ${clicked === i ? s['clicked'] : ''}`}
+            className={`${s['three-dot-wrapper']} ${clicked === i ? s['clicked'] : ''} ${
+              animation ? s['click-animation'] : ''
+            }`}
             onClick={(e) => {
               e.stopPropagation();
-              setClicked(i);
+              if (clicked === i) setClicked(-1);
+              else setClicked(i);
+              if (animation) setAnimation(false);
+              setTimeout(() => setAnimation(true), 10);
             }}
           >
             <div className={s['three-dot-container']}>
@@ -99,3 +105,4 @@ export const NotificationPopup = () => {
     </div>
   );
 };
+export { NotificationPopup };

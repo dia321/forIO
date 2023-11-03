@@ -1,8 +1,5 @@
-@import '../styles/mixin';
-@import './SideMenu.module.scss';
-@import './NavBar.module.scss';
-$notification-popup-width: 400px;
-$notification-popup-height: 480px;
+@import '~/styles/mixin';
+@import '~/styles/variable';
 
 .wrapper {
   @apply block;
@@ -66,6 +63,8 @@ $notification-popup-height: 480px;
       border: 1px solid transparent;
       &.clicked {
         @apply visible;
+      }
+      &.click-animation {
         animation:
           clicked-background linear 500ms,
           clicked-border ease 1000ms;
@@ -130,7 +129,6 @@ $notification-popup-height: 480px;
   }
   50% {
     border-color: rgba(0, 0, 0, 0.075);
-    // border-color: red;
   }
   100% {
     border-color: none;

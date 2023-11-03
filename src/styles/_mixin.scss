@@ -2,12 +2,12 @@
 
 //모바일 : 최소 '모바일'사이즈
 @mixin mobile {
-  @media (max-width: #{$breakpoint-tablet - 1px}) {
+  @media (max-width: #{$breakpoint-tablet - 0.01px}) {
     @content;
   }
 }
 @mixin tablet {
-  @media (min-width: #{$breakpoint-tablet}) and (max-width: #{$breakpoint-laptop - 1px}) {
+  @media (min-width: #{$breakpoint-tablet}) and (max-width: #{$breakpoint-laptop - 0.01px}) {
     @content;
   }
 }

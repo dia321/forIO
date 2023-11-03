@@ -12,6 +12,7 @@ export const layoutState = atom({
   default: {
     sideMenuExpanded: true,
     notificationPopupVisible: false,
+    searchVisible: false,
     position: { x: 0, y: 0 },
     size: 'laptop'
   }

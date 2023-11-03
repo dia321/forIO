@@ -11,16 +11,16 @@ function App() {
   const setLayoutState = useSetRecoilState(loState);
   let timer: ReturnType<typeof setTimeout>;
   useEffect(() => {
+    const sizeChecker = () => {
+      if (window.innerWidth < 1024 && window.innerWidth >= 586) return 'tablet';
+      else if (window.innerWidth < 586) return 'mobile';
+      else return 'laptop';
+    };
+
     window.addEventListener('resize', () => {
       clearTimeout(timer);
       timer = setTimeout(() => {
-        if (window.innerWidth < 1024 && window.innerWidth >= 586) {
-          setLayoutState((prev) => ({ ...prev, size: 'tablet' }));
-        } else if (window.innerWidth < 586) {
-          setLayoutState((prev) => ({ ...prev, size: 'mobile' }));
-        } else {
-          setLayoutState((prev) => ({ ...prev, size: 'laptop' }));
-        }
+        setLayoutState((prev) => ({ ...prev, size: sizeChecker() }));
       }, 100);
     });
   }, []);

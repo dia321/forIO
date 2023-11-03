@@ -1,24 +1,28 @@
 import { useEffect, useRef, useState } from 'react';
 
-import NameLogo from '../assets/name-logo.svg?react';
-import smPhoto from '../assets/sm.jpg';
-import BurgerIcon from '../assets/hamburger-menu.svg?react';
-import SearchIcon from '../assets/search-icon.svg?react';
-import SpeackIcon from '../assets/speak-icon.svg?react';
-import NewVideoIcon from '../assets/new-video-icon.svg?react';
-import NotificationIcon from '../assets/notification-icon.svg?react';
+import NameLogo from '@assets/name-logo.svg?react';
+import smPhoto from '@assets/sm.jpg';
+import BurgerIcon from '@assets/hamburger-menu.svg?react';
+import SearchIcon from '@assets/search-icon.svg?react';
+import SpeackIcon from '@assets/speak-icon.svg?react';
+import NewVideoIcon from '@assets/new-video-icon.svg?react';
+import NotificationIcon from '@assets/notification-icon.svg?react';
 
 import styles from './NavBar.module.scss';
 
-import Tooltip from './Tooltip';
+import { Tooltip } from '@component/.';
 import { layoutState as loState, notificationState } from '@stores/layout';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import { Search } from '@component/Search';
 
 interface EventTargetWithId extends EventTarget {
   id: string;
 }
+interface EventTargetWithValue extends EventTarget {
+  value: string;
+}
 
-export const NavBar = () => {
+const NavBar = () => {
   const [focused, setFocused] = useState(false);
   const [tooltipVisible, setTooltipVisible] = useState<{ [key: string]: boolean }>({
     search: false,
@@ -30,6 +34,20 @@ export const NavBar = () => {
   const [noteCountState, setNoteCountState] = useState(0);
   const noteState = useRecoilValue(notificationState);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const searchList = [
+    'Profile',
+    '프로필',
+    '기술',
+    '기술 스택',
+    'Skill',
+    'Stack',
+    '개인정보',
+    'Tech Stack',
+    'Project',
+    'Project experience',
+    'Tech'
+  ];
+  const [suggestions, setSuggestions] = useState<string[]>(searchList.slice(0, 8));
 
   const handleMouseEnter: React.MouseEventHandler = (e) => {
     const { id } = e.currentTarget as EventTargetWithId;
@@ -55,12 +73,28 @@ export const NavBar = () => {
     const { id } = e.target as EventTargetWithId;
     if (
       (inputRef.current && inputRef.current.contains(e.target as Node)) ||
-      id === 'search-input-area'
+      id === 'search-input-area' ||
+      id === 'search-icon-in-input-area' ||
+      id === 'responsive-search-icon'
     ) {
       // 클릭 이벤트가 input 요소 외부에서 발생한 경우
       inputRef.current?.focus();
-    } else setFocused(false);
+      setFocused(true);
+      setLayoutState({ ...layoutState, searchVisible: true });
+    } else {
+      setFocused(false);
+      setLayoutState({ ...layoutState, searchVisible: false });
+    }
   };
+  const handleInputChange: React.ChangeEventHandler = (e) => {
+    const { value } = e.target as EventTargetWithValue;
+
+    const filteredSuggestions = searchList.filter((item) =>
+      item.toLowerCase().includes(value.toLowerCase())
+    );
+    setSuggestions(filteredSuggestions.slice(0, 8));
+  };
+
   const handleNotificationClick: React.MouseEventHandler = (e) => {
     e.stopPropagation();
     setLayoutState((prev) => ({
@@ -82,10 +116,17 @@ export const NavBar = () => {
     for (const n of noteState.note) if (n.on) count++;
     setNoteCountState(count);
   }, [noteState]);
+  useEffect(() => {
+    console.log(layoutState, focused);
+  }, [layoutState]);
   return (
     <>
       <div className={styles['nav-bar']}>
-        <div className={styles['partition']}>
+        <div
+          className={`${styles['partition']} ${styles['front']} ${
+            layoutState.size !== 'laptop' ? (focused ? styles['input-focused'] : '') : ''
+          }`}
+        >
           <div className={`${styles['burger-container']}`} onClick={handleMenuClick}>
             <div className={styles['burger-menu']}>
               <BurgerIcon />
@@ -98,7 +139,12 @@ export const NavBar = () => {
           </div>
         </div>
         <div className={styles['partition']}>
-          <div className={styles['search-container']} onClick={() => setFocused(true)}>
+          <div
+            className={`${styles['search-container']} ${
+              layoutState.size !== 'laptop' ? (focused ? styles['input-focused'] : '') : ''
+            }`}
+            onClick={() => setFocused(true)}
+          >
             <div
               className={styles['search-input-container']}
               data-focused={focused}
@@ -108,7 +154,7 @@ export const NavBar = () => {
                 className={`${styles['search-icon-container']} ${styles['front']}`}
                 data-focused={focused}
               >
-                <SearchIcon />
+                <SearchIcon id="search-icon-in-input-area" />
               </div>
               <div className="flex w-full justify-between">
                 <input
@@ -116,8 +162,8 @@ export const NavBar = () => {
                   placeholder="검색"
                   type="text"
                   onFocus={() => setFocused(true)}
-                  // onBlur={() => setFocused(false)}
                   ref={inputRef}
+                  onChange={handleInputChange}
                 />
                 <a href="" className="p-1">
                   <img
@@ -126,6 +172,7 @@ export const NavBar = () => {
                   />
                 </a>
               </div>
+              {layoutState.searchVisible && <Search suggestions={suggestions} />}
             </div>
             <div
               className={styles['search-button-container']}
@@ -151,7 +198,11 @@ export const NavBar = () => {
             </div>
           </div>
         </div>
-        <div className={`${styles['partition']} ${styles['shortcut-container']}`}>
+        <div
+          className={`${styles['partition']} ${styles['shortcut-container']} ${
+            layoutState.size !== 'laptop' ? (focused ? styles['input-focused'] : '') : ''
+          }`}
+        >
           <div
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -180,9 +231,9 @@ export const NavBar = () => {
             )}
           </div>
           <div className={styles['user-container']}>b</div>
-          <div className={styles['responsive-search-container']}>
+          <div className={styles['responsive-search-container']} onClick={() => handleInputClick}>
             <div className={styles['responsive-search-icon-container']}>
-              <SearchIcon />
+              <SearchIcon id="responsive-search-icon" />
             </div>
           </div>
         </div>
@@ -190,3 +241,5 @@ export const NavBar = () => {
     </>
   );
 };
+
+export { NavBar };

@@ -1,0 +1,34 @@
+@import '~/styles/variable';
+@import '~/styles/mixin';
+
+.search-wrapper {
+  @apply absolute rounded-lg bg-white right-0 py-4 z-20;
+  top: 40px;
+  // box-shadow: 0px 4px 32px 0px rgb(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: calc($searchInputWidth - $clicked);
+  .record-container {
+    @apply px-4 py-2 flex cursor-pointer;
+    height: 36px;
+    &:hover {
+      background-color: $basic-background-color;
+    }
+    .icon-container {
+      @apply mr-3;
+      padding-top: 2px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+@include media(tablet) {
+  .search-wrapper {
+    @apply visible;
+  }
+}
+// @include media(mobile) {
+//   .search-wrapper {
+//     @apply visible;
+//     width: 100%;
+//   }
+// }

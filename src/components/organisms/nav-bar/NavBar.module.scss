@@ -1,15 +1,8 @@
-@import '../styles/mixin';
-
-$searchInputWidth: 585px;
-$clicked: 100px;
-$searchButtonWidth: 64px;
-$center: calc((100% - $searchInputWidth - $searchButtonWidth) / 2 * 1);
-$navbar-height: 56px;
-$basic-background-color: rgba(0, 0, 0, 0.05);
-$hover-background-color: rgba(0, 0, 0, 0.1);
+@import '~/styles/mixin';
+@import '~/styles/variable';
 
 .nav-bar {
-  @apply fixed top-0 w-full px-3 flex flex-row items-center justify-between;
+  @apply fixed top-0 w-full px-3 flex flex-row items-center justify-between z-10;
   background-color: white;
   height: $navbar-height;
   .partition {
@@ -141,14 +134,23 @@ $hover-background-color: rgba(0, 0, 0, 0.1);
 
 @include media(mobile, tablet) {
   .nav-bar {
+    .front.input-focused {
+      @apply hidden;
+    }
     .partition {
       .burger-container {
         @apply hidden;
       }
       .search-container {
-        @apply hidden;
+        @apply invisible;
+        &.input-focused {
+          @apply visible;
+        }
       }
       &.shortcut-container {
+        &.input-focused {
+          @apply hidden;
+        }
         .new-video-container {
           @apply hidden;
         }
@@ -162,6 +164,19 @@ $hover-background-color: rgba(0, 0, 0, 0.1);
           @apply flex align-middle;
           height: 40px;
           width: 36px;
+        }
+      }
+    }
+  }
+}
+
+@include media(mobile) {
+  .nav-bar {
+    .partition {
+      .search-container {
+        @apply w-full left-0;
+        .search-input-container {
+          width: 100%;
         }
       }
     }

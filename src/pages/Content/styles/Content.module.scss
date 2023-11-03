@@ -1,8 +1,5 @@
-@import '../../../components/NavBar.module.scss';
-@import '../../../components/SideMenu.module.scss';
-@import '../../../styles/mixin';
-
-$card-height: 290px;
+@import '~/styles/variable';
+@import '~/styles/mixin';
 
 .content-wrapper {
   @apply w-full;

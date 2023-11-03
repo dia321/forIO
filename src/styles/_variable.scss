@@ -8,3 +8,28 @@ $breakpoint-tablet: 586px;
   laptop: $breakpoint-laptop;
   tablet: $breakpoint-tablet;
 }
+
+//navbar
+$searchInputWidth: 585px;
+$clicked: 100px;
+$searchButtonWidth: 64px;
+$center: calc((100% - $searchInputWidth - $searchButtonWidth) / 2 * 1);
+$navbar-height: 56px;
+$basic-background-color: rgba(0, 0, 0, 0.05);
+$hover-background-color: rgba(0, 0, 0, 0.1);
+
+//sidemenu
+$expanded-menu-width: 240px;
+$shrinked-menu-width: 64px;
+$mobile-menu-height: 64px;
+
+//notificationpopup
+$notification-popup-width: 400px;
+$notification-popup-height: 480px;
+
+//player
+$laptop-height: 90%;
+$other-height: 100%;
+
+//content
+$card-height: 290px;

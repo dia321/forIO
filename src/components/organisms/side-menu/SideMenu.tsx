@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import styles from './SideMenu.module.scss';
-import HomeIcon from '../assets/home-icon.svg?react';
-import HomeBlackIcon from '../assets/home-black-icon.svg?react';
-import ShortsIcon from '../assets/shorts-icon.svg?react';
-import ShortsBlackIcon from '../assets/shorts-black-icon.svg?react';
-import SubscribeIcon from '../assets/subscribe-icon.svg?react';
-import SubscribeBlackIcon from '../assets/subscribe-black-icon.svg?react';
+import HomeIcon from '@assets/home-icon.svg?react';
+import HomeBlackIcon from '@assets/home-black-icon.svg?react';
+import ShortsIcon from '@assets/shorts-icon.svg?react';
+import ShortsBlackIcon from '@assets/shorts-black-icon.svg?react';
+import SubscribeIcon from '@assets/subscribe-icon.svg?react';
+import SubscribeBlackIcon from '@assets/subscribe-black-icon.svg?react';
 import { useState } from 'react';
 
 interface SideMenuProps {
@@ -16,7 +16,7 @@ const MenuContainer = styled.div``;
 const IconContainer = styled.div``;
 const IconWrapper = styled.div``;
 
-export const SideMenu = (sideMenuProps: SideMenuProps) => {
+const SideMenu = (sideMenuProps: SideMenuProps) => {
   const { expanded = true } = sideMenuProps;
 
   const menuList = [
@@ -81,3 +81,5 @@ export const SideMenu = (sideMenuProps: SideMenuProps) => {
     </SideMenuArea>
   );
 };
+
+export { SideMenu };
