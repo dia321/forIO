@@ -20,6 +20,12 @@
       .x-button-container {
         @apply hidden;
       }
+      .info {
+        @apply text-transparent;
+      }
+      .description {
+        @apply invisible;
+      }
     }
   }
   .player-wrapper {
@@ -28,18 +34,34 @@
     height: 90%;
     width: 70%;
     animation: popin ease 500ms;
-    .video {
-      @apply rounded-lg w-full;
+    .info {
+      @apply rounded-lg text-white p-3;
+      height: 10%;
       background-color: rgb(#111, 0.5);
-      height: 60%;
     }
     .description {
-      height: 10%;
+      @apply p-3;
+      .file-download {
+        @apply cursor-pointer;
+        .icon-container {
+          @apply inline-block pt-2.5 px-1;
+          height: 24px;
+          width: 24px;
+        }
+        .file-name {
+          @apply underline text-gray-400;
+        }
+        &:hover {
+          .file-name {
+            @apply text-gray-500;
+          }
+        }
+      }
     }
-    .info {
-      @apply rounded-lg;
-      height: 30%;
+    .content {
+      @apply rounded-lg w-full;
       background-color: #eee;
+      height: 80%;
     }
     .x-button-container {
       @apply absolute self-end pr-3 pt-3 cursor-pointer;

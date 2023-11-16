@@ -5,10 +5,12 @@ import { AppRouter } from './AppRouter';
 import { YoutubeLayout } from '@component/templates/YoutubeLayout';
 import { useEffect } from 'react';
 import { layoutState as loState } from '@stores/layout';
+import { contentSelectorState } from '@stores/content/selector';
 
 function App() {
   //initial render
   const setLayoutState = useSetRecoilState(loState);
+  const setInfo = useSetRecoilState(contentSelectorState('contentInfo'));
   let timer: ReturnType<typeof setTimeout>;
   useEffect(() => {
     const sizeChecker = () => {
@@ -23,6 +25,53 @@ function App() {
         setLayoutState((prev) => ({ ...prev, size: sizeChecker() }));
       }, 100);
     });
+  }, []);
+  useEffect(() => {
+    const info = [] as { views: string; time: string }[];
+    for (let i = 0; i < 4; i++) {
+      const b100 = Math.floor(Math.random() * 1000);
+      const c1000 = Math.floor(Math.random() * 10);
+      const m10000 = Math.floor(Math.random() * 10);
+      const h24 = Math.floor(Math.random() * 24);
+      const d30 = Math.floor(Math.random() * 30);
+      const m12 = Math.floor(Math.random() * 12);
+      const y = Math.floor(Math.random() * 3);
+      const infoObj = {} as { views: string; time: string };
+      //0~1 백, 1~2 천, 2~3 만
+      const randomViewUnit = Math.random() * 3;
+      infoObj.views =
+        randomViewUnit < 1
+          ? `${!b100 ? '1' : b100 === 1000 ? '1천' : b100}`
+          : randomViewUnit < 2
+          ? `${c1000 ? c1000 : 1}천`
+          : `${m10000 ? m10000 : 1}만`;
+      // 0~1 시간, 1~2 일, 2~3 주, 3~4 달
+      const randomTimeUnit = Math.random() * 4;
+      infoObj.time =
+        randomTimeUnit < 1
+          ? !h24
+            ? '1시간'
+            : h24 === 24
+            ? '1일'
+            : `${h24}시간`
+          : randomTimeUnit < 2
+          ? !d30
+            ? '1일'
+            : d30 === 30
+            ? '1달'
+            : `${d30}일`
+          : randomTimeUnit < 3
+          ? !m12
+            ? '1달'
+            : m12 === 12
+            ? '1년'
+            : `${m12}달`
+          : !y
+          ? '1년'
+          : `${y}년`;
+      info.push(infoObj);
+    }
+    setInfo(info);
   }, []);
   return (
     <>

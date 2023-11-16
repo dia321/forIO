@@ -13,7 +13,7 @@ $breakpoint-tablet: 586px;
 $searchInputWidth: 585px;
 $clicked: 100px;
 $searchButtonWidth: 64px;
-$center: calc((100% - $searchInputWidth - $searchButtonWidth) / 2 * 1);
+$center: calc((100% - $searchInputWidth - $searchButtonWidth) / 2);
 $navbar-height: 56px;
 $basic-background-color: rgba(0, 0, 0, 0.05);
 $hover-background-color: rgba(0, 0, 0, 0.1);

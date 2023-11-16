@@ -7,6 +7,7 @@ import SearchIcon from '@assets/search-icon.svg?react';
 import SpeackIcon from '@assets/speak-icon.svg?react';
 import NewVideoIcon from '@assets/new-video-icon.svg?react';
 import NotificationIcon from '@assets/notification-icon.svg?react';
+import BackArrowIcon from '@assets/back-arrow-icon.svg?react';
 
 import styles from './NavBar.module.scss';
 
@@ -14,6 +15,7 @@ import { Tooltip } from '@component/.';
 import { layoutState as loState, notificationState } from '@stores/layout';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { Search } from '@component/Search';
+import { navBarElementState } from '@stores/layout/selector';
 
 interface EventTargetWithId extends EventTarget {
   id: string;
@@ -30,7 +32,12 @@ const NavBar = () => {
     newVid: false,
     notification: false
   });
-  const [layoutState, setLayoutState] = useRecoilState(loState);
+  const [notificationPopupState, setNotificationPopupState] = useRecoilState(
+    navBarElementState('notificationPopupVisible')
+  );
+  const [, setSearchState] = useRecoilState(navBarElementState('searchVisible'));
+  const [sideMenuState, setSideMenuState] = useRecoilState(navBarElementState('sideMenuExpanded'));
+  const [layoutState] = useRecoilState(loState);
   const [noteCountState, setNoteCountState] = useState(0);
   const noteState = useRecoilValue(notificationState);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -66,11 +73,13 @@ const NavBar = () => {
   };
 
   const handleMenuClick = () => {
-    setLayoutState({ ...layoutState, sideMenuExpanded: !layoutState.sideMenuExpanded });
+    setSideMenuState(!sideMenuState);
   };
 
   const handleInputClick = (e: MouseEvent) => {
+    e.stopPropagation();
     const { id } = e.target as EventTargetWithId;
+    console.log(id, 'handleInputCLick');
     if (
       (inputRef.current && inputRef.current.contains(e.target as Node)) ||
       id === 'search-input-area' ||
@@ -80,14 +89,14 @@ const NavBar = () => {
       // 클릭 이벤트가 input 요소 외부에서 발생한 경우
       inputRef.current?.focus();
       setFocused(true);
-      setLayoutState({ ...layoutState, searchVisible: true });
+      setSearchState(true);
     } else {
       setFocused(false);
-      setLayoutState({ ...layoutState, searchVisible: false });
+      setSearchState(false);
     }
   };
   const handleInputChange: React.ChangeEventHandler = (e) => {
-    const { value } = e.target as EventTargetWithValue;
+    const { value } = e.target as unknown as EventTargetWithValue;
 
     const filteredSuggestions = searchList.filter((item) =>
       item.toLowerCase().includes(value.toLowerCase())
@@ -97,10 +106,7 @@ const NavBar = () => {
 
   const handleNotificationClick: React.MouseEventHandler = (e) => {
     e.stopPropagation();
-    setLayoutState((prev) => ({
-      ...prev,
-      notificationPopupVisible: !prev.notificationPopupVisible
-    }));
+    setNotificationPopupState(!notificationPopupState);
   };
   useEffect(() => {
     // 컴포넌트가 마운트될 때 document에 클릭 이벤트 리스너 추가
@@ -117,14 +123,14 @@ const NavBar = () => {
     setNoteCountState(count);
   }, [noteState]);
   useEffect(() => {
-    console.log(layoutState, focused);
+    console.log(`is it focused?? ${focused}`, layoutState);
   }, [layoutState]);
   return (
     <>
       <div className={styles['nav-bar']}>
         <div
           className={`${styles['partition']} ${styles['front']} ${
-            layoutState.size !== 'laptop' ? (focused ? styles['input-focused'] : '') : ''
+            focused ? styles['input-focused'] : ''
           }`}
         >
           <div className={`${styles['burger-container']}`} onClick={handleMenuClick}>
@@ -138,11 +144,15 @@ const NavBar = () => {
             <span className={styles['korea']}>KR</span>
           </div>
         </div>
+        <div
+          className={`${styles['back-arrow-container']} ${focused ? styles['input-focused'] : ''}`}
+        >
+          <div className={styles['icon-container']}></div>
+          <BackArrowIcon />
+        </div>
         <div className={styles['partition']}>
           <div
-            className={`${styles['search-container']} ${
-              layoutState.size !== 'laptop' ? (focused ? styles['input-focused'] : '') : ''
-            }`}
+            className={`${styles['search-container']} ${focused ? styles['input-focused'] : ''}`}
             onClick={() => setFocused(true)}
           >
             <div

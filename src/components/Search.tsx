@@ -1,5 +1,7 @@
 import TimePastIcon from '@assets/time-past-icon.svg?react';
 import s from './Search.module.scss';
+import { useRecoilState } from 'recoil';
+import { contentState as ctState } from '@stores/content';
 
 interface SearchProps {
   suggestions?: string[];
@@ -7,11 +9,17 @@ interface SearchProps {
 
 export const Search = (props: SearchProps) => {
   const { suggestions } = props;
+  const [, setContentState] = useRecoilState(ctState);
+
   return (
     <div className={s['search-wrapper']}>
       <ul>
         {suggestions?.map((suggestion, i) => (
-          <li className={s['record-container']} key={`search${i}`}>
+          <li
+            className={s['record-container']}
+            key={`search${i}`}
+            onClick={() => setContentState((prev) => ({ ...prev, visible: true, appear: true }))}
+          >
             <div className={s['icon-container']}>
               <TimePastIcon />
             </div>

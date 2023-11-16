@@ -1,7 +1,6 @@
 import { useRecoilState, useRecoilValue } from 'recoil';
 import s from '../styles/Content.module.scss';
 import { layoutState as loState } from '@stores/layout';
-import { contentState as ctState } from '@stores/content';
 
 import profileImage from '@assets/profile-image.png';
 import UserIcon from '@assets/user-icon.svg?react';
@@ -12,6 +11,7 @@ import ProjectIcon from '@assets/project-icon.svg?react';
 import toyProjectImage from '@assets/toy-project-image.png';
 import ToyProjectIcon from '@assets/toy-project-icon.svg?react';
 import { Player } from './Player';
+import { contentSelectorState } from '@stores/content/selector';
 
 const Content = () => {
   const contentList = [
@@ -21,7 +21,13 @@ const Content = () => {
     { content: 'toy', name: '개인 프로젝트' }
   ];
   const layoutState = useRecoilValue(loState);
-  const [contentState, setContentState] = useRecoilState(ctState);
+  const [, setVisible] = useRecoilState(contentSelectorState('visible'));
+  const [appear, setAppear] = useRecoilState(contentSelectorState('appear'));
+  const [, setType] = useRecoilState(contentSelectorState('type'));
+  const info = useRecoilValue(contentSelectorState('contentInfo')) as {
+    views: string;
+    time: string;
+  }[];
 
   return (
     <div className={`${s['content-wrapper']} ${layoutState.sideMenuExpanded && s['expanded']}`}>
@@ -30,7 +36,11 @@ const Content = () => {
           <div
             className={s['card']}
             key={`_${i}`}
-            onClick={() => setContentState((prev) => ({ ...prev, visible: true, appear: true }))}
+            onClick={() => {
+              setVisible(true);
+              setAppear(true);
+              setType(c.name);
+            }}
           >
             <div className={s['thumbnail']}>
               <div className={s['img-container']}>
@@ -83,13 +93,15 @@ const Content = () => {
               <div className={s['description']}>
                 <div className={s['title']}>{c.name}</div>
                 <div className={s['name']}>김성민</div>
-                <div className={s['info']}>조회수 2만회 · 15시간 전</div>
+                <div className={s['info']}>
+                  조회수 {info[i].views}회 · {info[i].time} 전
+                </div>
               </div>
             </div>
           </div>
         ))}
       </div>
-      {contentState.appear && <Player />}
+      {appear && <Player />}
     </div>
   );
 };

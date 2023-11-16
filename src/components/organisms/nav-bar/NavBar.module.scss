@@ -25,12 +25,22 @@
       margin: -8px 0 0 3px;
     }
   }
+  .back-arrow-container {
+    @apply hidden cursor-pointer py-2 rounded-full;
+    height: 40px;
+    width: 40px;
+    &:hover {
+      background-color: $hover-background-color;
+    }
+    .icon-container {
+    }
+  }
   .search-container {
     @apply items-center absolute flex;
     right: $center;
     width: calc($searchInputWidth + $searchButtonWidth);
     .search-input-container {
-      @apply relative items-center ml-8 flex flex-row;
+      @apply relative items-center flex flex-row;
       width: $searchInputWidth;
       height: 40px;
       border: 1px solid #ccc;
@@ -134,15 +144,23 @@
 
 @include media(mobile, tablet) {
   .nav-bar {
-    .front.input-focused {
-      @apply hidden;
+    .front {
+      &.input-focused {
+        @apply hidden;
+      }
+    }
+    .back-arrow-container {
+      &.input-focused {
+        @apply block;
+      }
     }
     .partition {
       .burger-container {
         @apply hidden;
       }
       .search-container {
-        @apply invisible;
+        @apply invisible left-14;
+        width: calc(100% - 40px);
         &.input-focused {
           @apply visible;
         }
@@ -174,10 +192,6 @@
   .nav-bar {
     .partition {
       .search-container {
-        @apply w-full left-0;
-        .search-input-container {
-          width: 100%;
-        }
       }
     }
   }

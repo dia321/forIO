@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import s from './NotificationPopup.module.scss';
-import { layoutState as loState, notificationState } from '@stores/layout';
+import { notificationState } from '@stores/layout';
 import { useRecoilState } from 'recoil';
 import XButtonBlackIcon from '@assets/x-button-black-icon.svg?react';
 import smPhoto from '@assets/sm.jpg';
@@ -8,9 +8,12 @@ import ThreeDotIcon from '@assets/three-dot-icon.svg?react';
 import EyeHideIcon from '@assets/eye-hide-icon.svg?react';
 import EyeIcon from '@assets/eye-icon.svg?react';
 import { EventTargetWithId } from '@type';
+import { navBarElementState } from '@stores/layout/selector';
 
 const NotificationPopup = () => {
-  const [, setLayoutState] = useRecoilState(loState);
+  const [, setNotificationPopupState] = useRecoilState(
+    navBarElementState('notificationPopupVisible')
+  );
   const [noteState, setNoteState] = useRecoilState(notificationState);
   const [clicked, setClicked] = useState(-1);
   const [animation, setAnimation] = useState(false);
@@ -28,11 +31,10 @@ const NotificationPopup = () => {
     }));
     setClicked(-1);
   };
-  console.log(noteState);
   useEffect(() => {
     const handleBackgroundClick = (e: MouseEvent) => {
       if (popupRef.current && !popupRef.current.contains(e.target as Node)) {
-        setLayoutState((prev) => ({ ...prev, notificationPopupVisible: false }));
+        setNotificationPopupState(false);
       }
     };
     document.addEventListener('click', handleBackgroundClick);
@@ -57,10 +59,7 @@ const NotificationPopup = () => {
     <div ref={popupRef} className={`${s['wrapper']}`}>
       <div className={s['header']}>
         <span>알림</span>
-        <div
-          className={s['x-button-container']}
-          onClick={() => setLayoutState((prev) => ({ ...prev, notificationPopupVisible: false }))}
-        >
+        <div className={s['x-button-container']} onClick={() => setNotificationPopupState(false)}>
           <XButtonBlackIcon />
         </div>
       </div>

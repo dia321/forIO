@@ -4,6 +4,7 @@
 .content-wrapper {
   @apply w-full;
   padding-top: $navbar-height;
+  padding-bottom: $mobile-menu-height;
   padding-left: $shrinked-menu-width;
   &.expanded {
     padding-left: $expanded-menu-width;

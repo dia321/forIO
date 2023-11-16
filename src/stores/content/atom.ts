@@ -7,6 +7,24 @@ export const contentState = atom({
   default: {
     visible: false,
     type: '',
-    appear: false
+    appear: false,
+    contentInfo: [
+      {
+        views: '',
+        time: ''
+      },
+      {
+        views: '',
+        time: ''
+      },
+      {
+        views: '',
+        time: ''
+      },
+      {
+        views: '',
+        time: ''
+      }
+    ]
   }
 });
