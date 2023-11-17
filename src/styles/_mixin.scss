@@ -7,7 +7,12 @@
   }
 }
 @mixin tablet {
-  @media (min-width: #{$breakpoint-tablet}) and (max-width: #{$breakpoint-laptop - 0.01px}) {
+  @media (min-width: #{$breakpoint-tablet}) and (max-width: #{$breakpoint-tablet-mid - 0.01px}) {
+    @content;
+  }
+}
+@mixin mid-tablet {
+  @media (min-width: #{$breakpoint-tablet-mid}) and (max-width: #{$breakpoint-laptop - 0.01px}) {
     @content;
   }
 }
@@ -20,6 +25,10 @@
       }
     } @else if ($key == tablet) {
       @include tablet {
+        @content;
+      }
+    } @else if ($key == mid-tablet) {
+      @include mid-tablet {
         @content;
       }
     }

@@ -1,0 +1,58 @@
+@import '~/styles/mixin';
+
+.profile-wrapper {
+  @apply grid grid-cols-2 p-3 gap-10 h-full overflow-auto;
+}
+.bundle {
+  @apply mb-12;
+  .bundle-title {
+    @apply text-lg font-bold mb-2;
+  }
+  .company-info {
+    @apply font-bold grid gap-10 mb-1;
+    grid-template-columns: 0.8fr 1fr;
+  }
+  .item {
+    @apply mb-3;
+    &.education-info {
+      @apply grid gap-10;
+      grid-template-columns: 0.8fr 1fr;
+    }
+    &.language-info {
+      @apply grid gap-5;
+      grid-template-columns: 1.4fr 1.4fr 0.4fr 1fr;
+    }
+    &.license-info {
+      @apply grid gap-5;
+      grid-template-columns: 3.2fr 1fr;
+    }
+    .li {
+      @apply ml-2 text-sm;
+      &::before {
+        content: '';
+        @apply rounded-full bg-black inline-block mr-1 -translate-y-1;
+        height: 2px;
+        width: 2px;
+      }
+    }
+  }
+}
+.grey {
+  @apply text-gray-500 ml-2;
+}
+
+@include media(tablet, mobile) {
+  .profile-wrapper {
+    @apply grid grid-cols-1 gap-0;
+  }
+}
+@include media(tablet) {
+  .company-info {
+    grid-template-columns: 4.5fr 3fr;
+  }
+}
+@include media(mobile) {
+  .company-info {
+    grid-template-columns: 6fr 3fr;
+  }
+}

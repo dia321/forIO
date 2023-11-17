@@ -14,7 +14,8 @@ function App() {
   let timer: ReturnType<typeof setTimeout>;
   useEffect(() => {
     const sizeChecker = () => {
-      if (window.innerWidth < 1024 && window.innerWidth >= 586) return 'tablet';
+      if (window.innerWidth < 1024 && window.innerWidth >= 586) return 'mid-tablet';
+      else if (window.innerWidth < 800 && window.innerWidth >= 586) return 'tablet';
       else if (window.innerWidth < 586) return 'mobile';
       else return 'laptop';
     };

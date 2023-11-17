@@ -4,6 +4,7 @@ import XButtonIcon from '@assets/x-button-icon.svg?react';
 import ClipIcon from '@assets/clip-icon.svg?react';
 import { useRef } from 'react';
 import { contentSelectorState } from '@stores/content/selector';
+import Profile from './Profile';
 
 export const Player = () => {
   const [visible, setVisible] = useRecoilState(contentSelectorState('visible'));
@@ -48,8 +49,16 @@ export const Player = () => {
               툴(Tool)로 분류해보았습니다
             </>
           )}
+          {type === '참여 프로젝트' && <>담당한 프로젝트를 최신순으로 구성했습니다</>}
+          {type === '개인 프로젝트' && (
+            <>
+              webpack 기반의 Vanilla Javascript로 만든 포스트잇 메모 생성기입니다
+              <hr />
+              Github: <a>~~~</a>
+            </>
+          )}
         </div>
-        <div className={s['content']}></div>
+        <div className={s['content']}>{type === 'Profile' && <Profile />}</div>
         <div
           className={s['x-button-container']}
           onClick={() => {

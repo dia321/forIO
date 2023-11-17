@@ -41,7 +41,7 @@
   }
 }
 
-@include media(mobile, tablet) {
+@include media(mobile, tablet, mid-tablet) {
   .side-menu {
     @apply flex justify-between;
     top: unset;

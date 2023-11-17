@@ -4,6 +4,8 @@ $breakpoint-laptop: 1024px;
 // tablet
 $breakpoint-tablet: 586px;
 
+$breakpoint-tablet-mid: 800px;
+
 :export {
   laptop: $breakpoint-laptop;
   tablet: $breakpoint-tablet;
