@@ -48,7 +48,7 @@
     .description {
       width: 77%;
       .content {
-        @apply mb-2 overflow-hidden text-ellipsis;
+        @apply mb-2 overflow-hidden text-ellipsis text-black;
       }
       .date {
         @apply text-xs font-normal;
@@ -99,6 +99,9 @@
     height: 24px;
     width: 24px;
   }
+  span {
+    @apply text-black;
+  }
 }
 
 @include media(tablet, mobile) {
@@ -106,6 +109,11 @@
     @apply top-0 right-0;
     height: calc(100vh - $mobile-menu-height);
     max-height: 480px;
+    .not-container {
+      .three-dot-wrapper {
+        @apply visible;
+      }
+    }
   }
 }
 
