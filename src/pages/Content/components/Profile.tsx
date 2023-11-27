@@ -53,6 +53,9 @@ const Profile = () => {
                 <div>효성첨단소재</div>
                 <div className={`${s['grey']} font-normal`}>2018. 01 - 2019.11</div>
               </div>
+              <ol>
+                <li className={s['li']}>연구소 재직</li>
+              </ol>
             </div>
           </div>
         </div>
@@ -61,7 +64,7 @@ const Profile = () => {
             <div className={s['bundle-title']}>학력</div>
             <div className={`${s['item']} ${s['education-info']}`}>
               <div>연세대학교 신소재공학</div>
-              <div className={s['grey']}>2011.03 - 2018.02</div>
+              <div className={s['grey']}>2011. 03 - 2018. 02</div>
             </div>
           </div>
           <div className={s['bundle']}>

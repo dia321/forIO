@@ -1,39 +1,46 @@
 @import '~/styles/mixin';
+@import './common';
 
 .profile-wrapper {
-  @apply grid grid-cols-2 p-3 gap-10 h-full overflow-auto;
+  @extend .wrapper;
+  @apply grid-cols-2 p-3;
 }
 .bundle {
-  @apply mb-12;
-  .bundle-title {
-    @apply text-lg font-bold mb-2 text-black;
+  @apply mb-6 p-3;
+  box-shadow: rgba(0, 0, 0, 0.15) 4.8px 4.8px 6.4px 2px;
+  &:hover {
+    animation: hover-animation 1s ease;
+    animation-fill-mode: forwards;
   }
-  .company-info {
-    @apply font-bold grid gap-10 mb-1 text-black;
+}
+.bundle-title {
+  @apply text-lg font-bold mb-2 text-black;
+}
+.company-info {
+  @apply font-bold grid gap-10 mb-1 text-black;
+  grid-template-columns: 0.8fr 1fr;
+}
+.item {
+  @apply mb-3;
+  &.education-info {
+    @apply grid gap-10 text-black;
     grid-template-columns: 0.8fr 1fr;
   }
-  .item {
-    @apply mb-3;
-    &.education-info {
-      @apply grid gap-10 text-black;
-      grid-template-columns: 0.8fr 1fr;
-    }
-    &.language-info {
-      @apply grid gap-5 text-black;
-      grid-template-columns: 1.4fr 1.4fr 0.4fr 1fr;
-    }
-    &.license-info {
-      @apply grid gap-5 text-black;
-      grid-template-columns: 3.2fr 1fr;
-    }
-    .li {
-      @apply ml-2 text-sm text-black;
-      &::before {
-        content: '';
-        @apply rounded-full bg-black inline-block mr-1 -translate-y-1;
-        height: 2px;
-        width: 2px;
-      }
+  &.language-info {
+    @apply grid gap-5 text-black;
+    grid-template-columns: 1.4fr 1.4fr 0.4fr 1fr;
+  }
+  &.license-info {
+    @apply grid gap-5 text-black;
+    grid-template-columns: 3.2fr 1fr;
+  }
+  .li {
+    @apply ml-2 text-sm text-black;
+    &::before {
+      content: '';
+      @apply rounded-full bg-black inline-block mr-1 -translate-y-1;
+      height: 2px;
+      width: 2px;
     }
   }
 }
@@ -41,9 +48,25 @@
   @apply text-gray-500 ml-2;
 }
 
+@keyframes hover-animation {
+  0% {
+  }
+  100% {
+    transform: translate(-4.8px, -6.4px);
+    box-shadow: rgba(0, 0, 0, 0.15) 9.6px 9.6px 12.8px 4px;
+  }
+}
+
 @include media(tablet, mobile) {
   .profile-wrapper {
     @apply grid grid-cols-1 gap-0;
+  }
+  .bundle {
+    @apply p-0 mb-20;
+    box-shadow: none;
+    &:hover {
+      animation: unset;
+    }
   }
 }
 @include media(tablet) {

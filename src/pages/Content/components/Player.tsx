@@ -5,10 +5,11 @@ import ClipIcon from '@assets/clip-icon.svg?react';
 import { useRef } from 'react';
 import { contentSelectorState } from '@stores/content/selector';
 import Profile from './Profile';
+import Skills from './Skills';
 
 export const Player = () => {
   const [visible, setVisible] = useRecoilState(contentSelectorState('visible'));
-  const [, setAppear] = useRecoilState(contentSelectorState('appear'));
+  const [appear, setAppear] = useRecoilState(contentSelectorState('appear'));
   const type = useRecoilValue(contentSelectorState('type')) as string;
 
   const popupRef = useRef<HTMLDivElement | null>(null);
@@ -58,7 +59,9 @@ export const Player = () => {
             </>
           )}
         </div>
-        <div className={s['content']}>{type === 'Profile' && <Profile />}</div>
+        <div className={s['content']}>
+          {appear && type === 'Profile' ? <Profile /> : type === 'Skills' ? <Skills /> : ''}
+        </div>
         <div
           className={s['x-button-container']}
           onClick={() => {

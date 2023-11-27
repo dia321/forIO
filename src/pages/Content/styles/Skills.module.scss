@@ -1,0 +1,36 @@
+@import '~/styles/mixin';
+@import './common';
+
+.skills-wrapper {
+  @extend .wrapper;
+}
+
+.classification {
+  @apply text-lg font-bold text-black;
+}
+
+.hard-skills {
+  @apply grid grid-cols-3;
+}
+.level {
+  @apply ml-2;
+  font-size: 0.875rem;
+  span {
+    @apply p-1;
+  }
+}
+.high {
+  color: rgba(51, 126, 169, 1);
+}
+.middle {
+  color: rgba(203, 145, 47, 1);
+}
+.low {
+  color: rgba(212, 76, 71, 1);
+}
+.semi-classification {
+  @apply font-semibold text-black;
+}
+.others {
+  @apply grid grid-cols-3;
+}
