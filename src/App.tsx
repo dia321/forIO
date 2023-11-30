@@ -1,16 +1,23 @@
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 
 import './App.css';
-import { AppRouter } from './AppRouter';
+// import { AppRouter } from './AppRouter';
 import { YoutubeLayout } from '@component/templates/YoutubeLayout';
 import { useEffect } from 'react';
-import { layoutState as loState } from '@stores/layout';
+import { layoutElementState } from '@stores/layout';
 import { contentSelectorState } from '@stores/content/selector';
+import { activeState } from '@stores/menu';
+import Content from './pages/Content/components/Content';
+import About from './pages/About/components/About';
+import Contact from './pages/Contact/components/Contact';
+import Container from '@component/organisms/container/Container';
 
 function App() {
   //initial render
-  const setLayoutState = useSetRecoilState(loState);
-  const setInfo = useSetRecoilState(contentSelectorState('contentInfo'));
+  const [, setSize] = useRecoilState(layoutElementState('size'));
+  const [, setInfo] = useRecoilState(contentSelectorState('contentInfo'));
+
+  const [active] = useRecoilState(activeState);
   let timer: ReturnType<typeof setTimeout>;
   useEffect(() => {
     const sizeChecker = () => {
@@ -23,7 +30,7 @@ function App() {
     window.addEventListener('resize', () => {
       clearTimeout(timer);
       timer = setTimeout(() => {
-        setLayoutState((prev) => ({ ...prev, size: sizeChecker() }));
+        setSize(sizeChecker());
       }, 100);
     });
   }, []);
@@ -77,7 +84,8 @@ function App() {
   return (
     <>
       <YoutubeLayout />
-      <AppRouter />
+      {/* <AppRouter /> */}
+      <Container>{active === 0 ? <Content /> : active === 1 ? <About /> : <Contact />}</Container>
     </>
   );
 }

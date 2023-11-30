@@ -8,11 +8,11 @@ import ThreeDotIcon from '@assets/three-dot-icon.svg?react';
 import EyeHideIcon from '@assets/eye-hide-icon.svg?react';
 import EyeIcon from '@assets/eye-icon.svg?react';
 import { EventTargetWithId } from '@type';
-import { navBarElementState } from '@stores/layout/selector';
+import { layoutElementState } from '@stores/layout/selector';
 
 const NotificationPopup = () => {
   const [, setNotificationPopupState] = useRecoilState(
-    navBarElementState('notificationPopupVisible')
+    layoutElementState('notificationPopupVisible')
   );
   const [noteState, setNoteState] = useRecoilState(notificationState);
   const [clicked, setClicked] = useState(-1);

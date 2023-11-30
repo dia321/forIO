@@ -7,6 +7,8 @@ import ShortsBlackIcon from '@assets/shorts-black-icon.svg?react';
 import SubscribeIcon from '@assets/subscribe-icon.svg?react';
 import SubscribeBlackIcon from '@assets/subscribe-black-icon.svg?react';
 import { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { activeState, menuListState } from '@stores/menu';
 
 interface SideMenuProps {
   expanded: boolean;
@@ -19,27 +21,11 @@ const IconWrapper = styled.div``;
 const SideMenu = (sideMenuProps: SideMenuProps) => {
   const { expanded = true } = sideMenuProps;
 
-  const menuList = [
-    { menu: 'home', name: '홈' },
-    { menu: 'shorts', name: 'Shorts' },
-    { menu: 'subscribe', name: '구독' }
-  ];
-  const [selected, setSelected] = useState<{ [key: string]: boolean }>(
-    menuList.reduce(
-      (accumulator, value, index) => ({ ...accumulator, [value.menu]: index ? false : true }),
-      {}
-    )
-  );
+  const [menuList] = useRecoilState(menuListState);
+  const [active, setActive] = useRecoilState(activeState);
+
   const handleClick = (idx: number) => {
-    setSelected(
-      menuList.reduce(
-        (accumulator, value, index) => ({
-          ...accumulator,
-          [value.menu]: index === idx ? true : false
-        }),
-        {}
-      )
-    );
+    setActive(idx);
   };
   return (
     <SideMenuArea className={`${styles['side-menu']} ${expanded && styles['expanded']}`}>
@@ -47,25 +33,25 @@ const SideMenu = (sideMenuProps: SideMenuProps) => {
         <MenuContainer
           className={styles['menu-container']}
           key={_.menu}
-          data-selected={selected[_.menu]}
+          data-selected={active === index}
           onClick={() => handleClick(index)}
         >
           <IconWrapper className={styles['icon-wrapper']}>
             <IconContainer className={styles['icon-container']}>
               {_.menu === 'home' ? (
-                selected['home'] ? (
+                active === 0 ? (
                   <HomeBlackIcon />
                 ) : (
                   <HomeIcon />
                 )
               ) : _.menu === 'shorts' ? (
-                selected['shorts'] ? (
+                active === 1 ? (
                   <ShortsBlackIcon />
                 ) : (
                   <ShortsIcon />
                 )
               ) : _.menu === 'subscribe' ? (
-                selected['subscribe'] ? (
+                active === 2 ? (
                   <SubscribeBlackIcon />
                 ) : (
                   <SubscribeIcon />

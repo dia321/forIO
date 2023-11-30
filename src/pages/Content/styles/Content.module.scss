@@ -1,16 +1,6 @@
 @import '~/styles/variable';
 @import '~/styles/mixin';
 
-.content-wrapper {
-  @apply w-full;
-  padding-top: $navbar-height;
-  padding-bottom: $mobile-menu-height;
-  padding-left: $shrinked-menu-width;
-  &.expanded {
-    padding-left: $expanded-menu-width;
-  }
-}
-
 .content {
   @apply px-8 py-4 grid grid-cols-3 gap-8;
 }
@@ -70,27 +60,17 @@
     }
   }
 }
-
-@include media(mobile, tablet, mid-tablet) {
-  .content-wrapper {
-    @apply pl-0;
-    &.expanded {
-      @apply pl-0;
-    }
-    .content {
-      @apply grid-cols-2;
-    }
+@include media(tablet, mid-tablet) {
+  .content {
+    @apply grid-cols-2;
   }
 }
-
 @include media(mobile) {
-  .content-wrapper {
-    .content {
-      @apply grid-cols-1 px-0;
-      .card {
-        .thumbnail {
-          @apply rounded-none;
-        }
+  .content {
+    @apply grid-cols-1 px-0;
+    .card {
+      .thumbnail {
+        @apply rounded-none;
       }
     }
   }

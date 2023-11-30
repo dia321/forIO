@@ -5,8 +5,7 @@ const Skills = () => {
     <>
       <div className={s['skills-wrapper']}>
         <div className={s['hard-skills']}>
-          <div></div>
-          <div className={`${s['classification']} flex justify-center`}>
+          <div className={`${s['classification']}`}>
             <div>Hard Skills</div>
             <div className={s['level']}>
               <span className={s['high']}>상</span>
@@ -14,33 +13,34 @@ const Skills = () => {
               <span className={s['low']}>하</span>
             </div>
           </div>
-          <div></div>
-          <div className={s['bundle']}>
-            <div className={`${s['semi-classification']}`}>Language </div>
-            <ol>
-              <li className={s['high']}>Javascript</li>
-              <li className={s['high']}>Typescript</li>
-              <li className={s['middle']}>Python</li>
-              <li className={s['low']}>Java</li>
-            </ol>
-          </div>
-          <div className={s['bundle']}>
-            <div className={s['classification']}>Framework / Library</div>
-            <ol>
-              <li className={s['high']}>React - Recoil, React query, Mobx</li>
-              <li className={s['high']}>Vue - Vuex, Composition api</li>
-              <li className={s['high']}>Webpack, Vite</li>
-              <li className={s['low']}>Django</li>
-              <li className={s['low']}>SpringBoot</li>
-            </ol>
-          </div>
-          <div className={s['bundle']}>
-            <div className={s['classification']}>Markup</div>
-            <ol>
-              <li className={s['middle']}>HTML</li>
-              <li className={s['middle']}>CSS</li>
-              <li className={s['middle']}>SCSS, Styled component, Tailwind</li>
-            </ol>
+          <div className={s['hard-children']}>
+            <div className={s['bundle']}>
+              <div className={`${s['semi-classification']}`}>Language </div>
+              <ol>
+                <li className={s['high']}>Javascript</li>
+                <li className={s['high']}>Typescript</li>
+                <li className={s['middle']}>Python</li>
+                <li className={s['low']}>Java</li>
+              </ol>
+            </div>
+            <div className={s['bundle']}>
+              <div className={s['semi-classification']}>Framework / Library</div>
+              <ol>
+                <li className={s['high']}>React - Recoil, React query, Mobx</li>
+                <li className={s['high']}>Vue - Vuex, Composition api</li>
+                <li className={s['middle']}>Webpack, Vite</li>
+                <li className={s['low']}>Django</li>
+                <li className={s['low']}>SpringBoot</li>
+              </ol>
+            </div>
+            <div className={s['bundle']}>
+              <div className={s['semi-classification']}>Markup</div>
+              <ol>
+                <li className={s['middle']}>HTML</li>
+                <li className={s['middle']}>CSS</li>
+                <li className={s['middle']}>SCSS, Styled component, Tailwind</li>
+              </ol>
+            </div>
           </div>
         </div>
         <div className={s['others']}>

@@ -1,0 +1,22 @@
+@import '~/styles/mixin';
+@import './common';
+
+.project-wrapper {
+  @apply grid grid-cols-2 gap-5;
+}
+
+.title {
+  @apply text-black font-bold ml-5;
+}
+.period {
+  @apply text-gray-500 text-xs font-semibold mr-5;
+}
+.description {
+  @apply text-black;
+}
+
+@include media(tablet, mobile) {
+  .project-wrapper {
+    @apply grid-cols-1;
+  }
+}

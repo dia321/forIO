@@ -1,3 +1,28 @@
-.wrapper {
+.player-content-wrapper {
   @apply grid gap-10 h-full overflow-auto p-3;
+}
+.bundle {
+  @apply mb-6 p-3;
+  box-shadow: rgba(0, 0, 0, 0.15) 4.8px 4.8px 6.4px 2px;
+  &:hover {
+    animation: hover-animation 1s ease;
+    animation-fill-mode: forwards;
+  }
+}
+@keyframes hover-animation {
+  0% {
+  }
+  100% {
+    transform: translate(-4.8px, -6.4px);
+    box-shadow: rgba(0, 0, 0, 0.15) 9.6px 9.6px 12.8px 4px;
+  }
+}
+@include media(tablet, mobile) {
+  .bundle {
+    @apply p-0 mb-20;
+    box-shadow: none;
+    &:hover {
+      animation: unset;
+    }
+  }
 }

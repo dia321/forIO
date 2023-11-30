@@ -6,6 +6,7 @@ import { useRef } from 'react';
 import { contentSelectorState } from '@stores/content/selector';
 import Profile from './Profile';
 import Skills from './Skills';
+import Project from './Project';
 
 export const Player = () => {
   const [visible, setVisible] = useRecoilState(contentSelectorState('visible'));
@@ -55,12 +56,27 @@ export const Player = () => {
             <>
               webpack 기반의 Vanilla Javascript로 만든 포스트잇 메모 생성기입니다
               <hr />
-              Github: <a>~~~</a>
+              Github:{' '}
+              <a
+                className={s['url-link']}
+                target="blank"
+                href="https://github.com/dia321/pjt-postit"
+              >
+                https://github.com/dia321/pjt-postit
+              </a>
             </>
           )}
         </div>
         <div className={s['content']}>
-          {appear && type === 'Profile' ? <Profile /> : type === 'Skills' ? <Skills /> : ''}
+          {appear && type === 'Profile' ? (
+            <Profile />
+          ) : type === 'Skills' ? (
+            <Skills />
+          ) : type === '참여 프로젝트' ? (
+            <Project />
+          ) : (
+            ''
+          )}
         </div>
         <div
           className={s['x-button-container']}

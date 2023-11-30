@@ -15,7 +15,7 @@ import { Tooltip } from '@component/.';
 import { layoutState as loState, notificationState } from '@stores/layout';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { Search } from '@component/Search';
-import { navBarElementState } from '@stores/layout/selector';
+import { layoutElementState } from '@stores/layout/selector';
 
 interface EventTargetWithId extends EventTarget {
   id: string;
@@ -33,10 +33,10 @@ const NavBar = () => {
     notification: false
   });
   const [notificationPopupState, setNotificationPopupState] = useRecoilState(
-    navBarElementState('notificationPopupVisible')
+    layoutElementState('notificationPopupVisible')
   );
-  const [, setSearchState] = useRecoilState(navBarElementState('searchVisible'));
-  const [sideMenuState, setSideMenuState] = useRecoilState(navBarElementState('sideMenuExpanded'));
+  const [, setSearchState] = useRecoilState(layoutElementState('searchVisible'));
+  const [sideMenuState, setSideMenuState] = useRecoilState(layoutElementState('sideMenuExpanded'));
   const [layoutState] = useRecoilState(loState);
   const [noteCountState, setNoteCountState] = useState(0);
   const noteState = useRecoilValue(notificationState);

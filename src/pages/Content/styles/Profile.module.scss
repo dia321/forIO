@@ -2,17 +2,10 @@
 @import './common';
 
 .profile-wrapper {
-  @extend .wrapper;
+  @extend .player-content-wrapper;
   @apply grid-cols-2 p-3;
 }
-.bundle {
-  @apply mb-6 p-3;
-  box-shadow: rgba(0, 0, 0, 0.15) 4.8px 4.8px 6.4px 2px;
-  &:hover {
-    animation: hover-animation 1s ease;
-    animation-fill-mode: forwards;
-  }
-}
+
 .bundle-title {
   @apply text-lg font-bold mb-2 text-black;
 }
@@ -48,25 +41,9 @@
   @apply text-gray-500 ml-2;
 }
 
-@keyframes hover-animation {
-  0% {
-  }
-  100% {
-    transform: translate(-4.8px, -6.4px);
-    box-shadow: rgba(0, 0, 0, 0.15) 9.6px 9.6px 12.8px 4px;
-  }
-}
-
 @include media(tablet, mobile) {
   .profile-wrapper {
     @apply grid grid-cols-1 gap-0;
-  }
-  .bundle {
-    @apply p-0 mb-20;
-    box-shadow: none;
-    &:hover {
-      animation: unset;
-    }
   }
 }
 @include media(tablet) {

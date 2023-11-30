@@ -2,15 +2,14 @@
 @import './common';
 
 .skills-wrapper {
-  @extend .wrapper;
+  @extend .player-content-wrapper;
 }
 
 .classification {
-  @apply text-lg font-bold text-black;
+  @apply text-lg font-bold text-black mb-6 flex justify-center;
 }
-
-.hard-skills {
-  @apply grid grid-cols-3;
+.hard-children {
+  @apply grid grid-cols-3 gap-5;
 }
 .level {
   @apply ml-2;
@@ -32,5 +31,16 @@
   @apply font-semibold text-black;
 }
 .others {
-  @apply grid grid-cols-3;
+  @apply grid grid-cols-2 gap-5;
+  div {
+    color: black;
+  }
+}
+
+@include media(tablet, mobile) {
+  .hard-children {
+    @apply grid grid-cols-1 gap-0;
+  }
+  .bundle {
+  }
 }

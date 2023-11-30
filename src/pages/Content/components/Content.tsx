@@ -1,6 +1,5 @@
 import { useRecoilState, useRecoilValue } from 'recoil';
 import s from '../styles/Content.module.scss';
-import { layoutState as loState } from '@stores/layout';
 
 import profileImage from '@assets/profile-image.png';
 import UserIcon from '@assets/user-icon.svg?react';
@@ -20,7 +19,7 @@ const Content = () => {
     { content: 'project', name: '참여 프로젝트' },
     { content: 'toy', name: '개인 프로젝트' }
   ];
-  const layoutState = useRecoilValue(loState);
+
   const [, setVisible] = useRecoilState(contentSelectorState('visible'));
   const [appear, setAppear] = useRecoilState(contentSelectorState('appear'));
   const [, setType] = useRecoilState(contentSelectorState('type'));
@@ -30,7 +29,7 @@ const Content = () => {
   }[];
 
   return (
-    <div className={`${s['content-wrapper']} ${layoutState.sideMenuExpanded && s['expanded']}`}>
+    <>
       <div className={s['content']}>
         {contentList.map((c, i) => (
           <div
@@ -102,7 +101,7 @@ const Content = () => {
         ))}
       </div>
       {appear && <Player />}
-    </div>
+    </>
   );
 };
 
