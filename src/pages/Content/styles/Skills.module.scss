@@ -3,6 +3,7 @@
 
 .skills-wrapper {
   @extend .player-content-wrapper;
+  @apply gap-1;
 }
 
 .classification {
