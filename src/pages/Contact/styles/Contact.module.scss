@@ -1,0 +1,56 @@
+.contact {
+  @apply px-8 py-4;
+}
+.info-card {
+  @apply grid;
+  grid-template-columns: 1fr 2.5fr 5fr 1fr;
+}
+.card-inner {
+  @apply flex relative;
+}
+.angle-zone {
+  @apply mx-2 h-12 w-10 self-center cursor-pointer;
+  &.right {
+    transform: translateX(-15px);
+    &:hover {
+      animation: onMouseOver ease-in-out 0.8s infinite;
+      &:active {
+        animation: none;
+        transform: translate(-5px, 5px);
+      }
+    }
+  }
+  &.left {
+    transform: translateX(15px);
+    &:hover {
+      animation: onMouseOver2 ease-in-out 0.8s infinite;
+      &:active {
+        animation: none;
+        transform: translate(5px, 5px);
+      }
+    }
+  }
+}
+.photo-zone {
+  @apply h-56 w-56 rounded-full overflow-hidden;
+}
+.ref-control {
+  @apply flex h-full w-full;
+}
+.photo-container {
+  @apply rounded-full block min-h-full min-w-full;
+  border: 1px solid black;
+}
+
+@keyframes onMouseOver {
+  100% {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+}
+@keyframes onMouseOver2 {
+  100% {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+}
