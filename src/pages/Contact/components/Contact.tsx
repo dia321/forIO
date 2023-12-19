@@ -9,7 +9,7 @@ import { Fragment, useEffect, useRef, useState } from 'react';
 
 const Contact = () => {
   const photoRef = useRef<HTMLDivElement>(null);
-  const photoList = [smPhoto, exPhoto1, exPhoto2, exPhoto3];
+  const photoList = [smPhoto, exPhoto1, exPhoto2, exPhoto3, smPhoto];
   const [slide, setSlide] = useState({
     ing: false,
     direction: '',
@@ -19,7 +19,7 @@ const Contact = () => {
     if (slide.ing)
       setTimeout(() => {
         setSlide({ ...slide, ing: false });
-      }, 500);
+      }, 300);
   }, [slide.ing]);
   return (
     <div className={s['contact']}>
@@ -60,8 +60,8 @@ const Contact = () => {
             <AngleRightIcon />
           </div>
         </div>
-        <div className={s['right']}>
-          <div>김성민</div>
+        <div className={s['blabla']}>
+          <div className="text-4xl font-bold">김성민</div>
           <div></div>
         </div>
         <div></div>

@@ -33,47 +33,52 @@
 }
 .photo-zone {
   @apply h-56 w-56 rounded-full overflow-hidden;
+  border: 1px solid #ccc;
 }
 .ref-control {
   @apply flex h-full w-full;
   &.i-0 {
     &.left {
-      animation: lslide0 linear 0.5s;
+      animation: lslide0 linear 0.3s;
     }
     &.right {
-      animation: rslide0 linear 0.5s;
+      animation: rslide0 linear 0.3s;
     }
   }
   &.i-1 {
     margin-left: -224px;
     &.left {
-      animation: lslide1 linear 0.5s;
+      animation: lslide1 linear 0.3s;
     }
     &.right {
-      animation: rslide1 linear 0.5s;
+      animation: rslide1 linear 0.3s;
     }
   }
   &.i-2 {
     margin-left: -448px;
     &.left {
-      animation: lslide2 linear 0.5s;
+      animation: lslide2 linear 0.3s;
     }
     &.right {
-      animation: rslide2 linear 0.5s;
+      animation: rslide2 linear 0.3s;
     }
   }
   &.i-3 {
     margin-left: -672px;
     &.left {
-      animation: lslide3 linear 0.5s;
+      animation: lslide3 linear 0.3s;
     }
     &.right {
-      animation: rslide3 linear 0.5s;
+      animation: rslide3 linear 0.3s;
     }
   }
 }
 .photo-container {
   @apply rounded-full block min-h-full min-w-full;
+}
+
+.blabla {
+  @apply py-8;
 }
 
 @keyframes onMouseOver {
@@ -118,12 +123,12 @@
     margin-left: -672px;
   }
   100% {
-    margin-left: 0;
+    margin-left: -896px;
   }
 }
 @keyframes lslide3 {
   0% {
-    margin-left: 0;
+    margin-left: -896px;
   }
   100% {
     margin-left: -672px;
