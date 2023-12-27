@@ -1,3 +1,8 @@
+@import '~/styles/mixin';
+
+$pc-margin: 224px;
+$mobile-margin: 160px;
+
 .contact {
   @apply px-8 py-4;
 }
@@ -46,7 +51,7 @@
     }
   }
   &.i-1 {
-    margin-left: -224px;
+    margin-left: calc($pc-margin * 1 * -1);
     &.left {
       animation: lslide1 linear 0.3s;
     }
@@ -55,7 +60,7 @@
     }
   }
   &.i-2 {
-    margin-left: -448px;
+    margin-left: calc($pc-margin * 2 * -1);
     &.left {
       animation: lslide2 linear 0.3s;
     }
@@ -64,7 +69,7 @@
     }
   }
   &.i-3 {
-    margin-left: -672px;
+    margin-left: calc($pc-margin * 3 * -1);
     &.left {
       animation: lslide3 linear 0.3s;
     }
@@ -77,8 +82,60 @@
   @apply rounded-full block min-h-full min-w-full;
 }
 
-.blabla {
+.info {
   @apply py-8;
+  div {
+    @apply my-2;
+  }
+}
+
+.description {
+  --tw-text-opacity: 0.9;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
+  word-spacing: -3px;
+}
+
+@include media(tablet, mid-tablet, mobile) {
+  .photo-zone {
+    @apply h-40 w-40;
+  }
+  .ref-control {
+    &.i-0 {
+      &.left {
+        animation: mobile-lslide0 linear 0.3s;
+      }
+      &.right {
+        animation: mobile-rslide0 linear 0.3s;
+      }
+    }
+    &.i-1 {
+      margin-left: calc($mobile-margin * 1 * -1);
+      &.left {
+        animation: mobile-lslide1 linear 0.3s;
+      }
+      &.right {
+        animation: mobile-rslide1 linear 0.3s;
+      }
+    }
+    &.i-2 {
+      margin-left: calc($mobile-margin * 2 * -1);
+      &.left {
+        animation: mobile-lslide2 linear 0.3s;
+      }
+      &.right {
+        animation: mobile-rslide2 linear 0.3s;
+      }
+    }
+    &.i-3 {
+      margin-left: calc($mobile-margin * 3 * -1);
+      &.left {
+        animation: mobile-lslide3 linear 0.3s;
+      }
+      &.right {
+        animation: mobile-rslide3 linear 0.3s;
+      }
+    }
+  }
 }
 
 @keyframes onMouseOver {
@@ -93,68 +150,136 @@
     opacity: 0;
   }
 }
-
+//slide
 @keyframes rslide1 {
   0% {
     margin-left: 0;
   }
   100% {
-    margin-left: -224px;
+    margin-left: calc($pc-margin * 1 * -1);
   }
 }
 @keyframes rslide2 {
   0% {
-    margin-left: -224px;
+    margin-left: calc($pc-margin * 1 * -1);
   }
   100% {
-    margin-left: -448px;
+    margin-left: calc($pc-margin * 2 * -1);
   }
 }
 @keyframes rslide3 {
   0% {
-    margin-left: -448px;
+    margin-left: calc($pc-margin * 2 * -1);
   }
   100% {
-    margin-left: -672px;
+    margin-left: calc($pc-margin * 3 * -1);
   }
 }
 @keyframes rslide0 {
   0% {
-    margin-left: -672px;
+    margin-left: calc($pc-margin * 3 * -1);
   }
   100% {
-    margin-left: -896px;
+    margin-left: calc($pc-margin * 4 * -1);
   }
 }
 @keyframes lslide3 {
   0% {
-    margin-left: -896px;
+    margin-left: calc($pc-margin * 4 * -1);
   }
   100% {
-    margin-left: -672px;
+    margin-left: calc($pc-margin * 3 * -1);
   }
 }
 @keyframes lslide2 {
   0% {
-    margin-left: -672px;
+    margin-left: calc($pc-margin * 3 * -1);
   }
   100% {
-    margin-left: -448px;
+    margin-left: calc($pc-margin * 2 * -1);
   }
 }
 @keyframes lslide1 {
   0% {
-    margin-left: -448px;
+    margin-left: calc($pc-margin * 2 * -1);
   }
   100% {
-    margin-left: -224px;
+    margin-left: calc($pc-margin * 1 * -1);
   }
 }
 @keyframes lslide0 {
   0% {
-    margin-left: -224px;
+    margin-left: calc($pc-margin * 1 * -1);
   }
   100% {
     margin-left: 0;
   }
 }
+//slide
+
+//mobile-slide
+@keyframes mobile-rslide1 {
+  0% {
+    margin-left: 0;
+  }
+  100% {
+    margin-left: calc($mobile-margin * 1 * -1);
+  }
+}
+@keyframes mobile-rslide2 {
+  0% {
+    margin-left: calc($mobile-margin * 1 * -1);
+  }
+  100% {
+    margin-left: calc($mobile-margin * 2 * -1);
+  }
+}
+@keyframes mobile-rslide3 {
+  0% {
+    margin-left: calc($mobile-margin * 2 * -1);
+  }
+  100% {
+    margin-left: calc($mobile-margin * 3 * -1);
+  }
+}
+@keyframes mobile-rslide0 {
+  0% {
+    margin-left: calc($mobile-margin * 3 * -1);
+  }
+  100% {
+    margin-left: calc($mobile-margin * 4 * -1);
+  }
+}
+@keyframes mobile-lslide3 {
+  0% {
+    margin-left: calc($mobile-margin * 4 * -1);
+  }
+  100% {
+    margin-left: calc($mobile-margin * 3 * -1);
+  }
+}
+@keyframes mobile-lslide2 {
+  0% {
+    margin-left: calc($mobile-margin * 3 * -1);
+  }
+  100% {
+    margin-left: calc($mobile-margin * 2 * -1);
+  }
+}
+@keyframes mobile-lslide1 {
+  0% {
+    margin-left: calc($mobile-margin * 2 * -1);
+  }
+  100% {
+    margin-left: calc($mobile-margin * 1 * -1);
+  }
+}
+@keyframes mobile-lslide0 {
+  0% {
+    margin-left: calc($mobile-margin * 1 * -1);
+  }
+  100% {
+    margin-left: 0;
+  }
+}
+//mobile-slide

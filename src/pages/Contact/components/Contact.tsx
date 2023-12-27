@@ -5,7 +5,9 @@ import exPhoto2 from '@assets/skill-image.png';
 import exPhoto3 from '@assets/profile-image.png';
 import AngleLeftIcon from '@assets/angle-left-icon.svg?react';
 import AngleRightIcon from '@assets/angle-right-icon.svg?react';
+import ThinAngleRightIcon from '@assets/thin-angle-right-icon.svg?react';
 import { Fragment, useEffect, useRef, useState } from 'react';
+import Popup from './Popup';
 
 const Contact = () => {
   const photoRef = useRef<HTMLDivElement>(null);
@@ -15,6 +17,9 @@ const Contact = () => {
     direction: '',
     idx: 0
   });
+  const [popup, setPopup] = useState(false);
+  const handlePopup = () => {};
+
   useEffect(() => {
     if (slide.ing)
       setTimeout(() => {
@@ -23,6 +28,7 @@ const Contact = () => {
   }, [slide.ing]);
   return (
     <div className={s['contact']}>
+      <Popup />
       <div className={s['info-card']}>
         <div></div>
         <div className={s['card-inner']}>
@@ -30,7 +36,6 @@ const Contact = () => {
             className={`${s['angle-zone']} ${s['left']}`}
             onClick={(e) => {
               e.stopPropagation();
-              console.log('asdfasdf', slide.ing);
               if (slide.ing) return;
               setSlide({ idx: slide.idx === 0 ? 3 : slide.idx - 1, direction: 'left', ing: true });
             }}
@@ -60,9 +65,12 @@ const Contact = () => {
             <AngleRightIcon />
           </div>
         </div>
-        <div className={s['blabla']}>
-          <div className="text-4xl font-bold">김성민</div>
-          <div></div>
+        <div className={s['info']}>
+          <div className="text-4xl font-bold text-black">김성민</div>
+          <div className={s['description']}>@breadmie5064 · 구독자 5명 · 동영상 4개</div>
+          <div className={`${s['description']} flex cursor-pointer`} onClick={handlePopup}>
+            채널 자세히 알아보기 <ThinAngleRightIcon className="h-6" />
+          </div>
         </div>
         <div></div>
       </div>
