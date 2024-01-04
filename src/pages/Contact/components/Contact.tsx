@@ -18,7 +18,12 @@ const Contact = () => {
     idx: 0
   });
   const [popup, setPopup] = useState(false);
-  const handlePopup = () => {};
+  const handlePopup = () => {
+    setPopup(true);
+  };
+  const handleClickX = () => {
+    setPopup(false);
+  };
 
   useEffect(() => {
     if (slide.ing)
@@ -28,7 +33,7 @@ const Contact = () => {
   }, [slide.ing]);
   return (
     <div className={s['contact']}>
-      <Popup />
+      {popup && <Popup handleClickX={handleClickX} />}
       <div className={s['info-card']}>
         <div></div>
         <div className={s['card-inner']}>

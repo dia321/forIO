@@ -11,7 +11,7 @@ $mobile-margin: 160px;
   grid-template-columns: 1fr 2.5fr 5fr 1fr;
 }
 .card-inner {
-  @apply flex relative;
+  @apply flex relative h-56;
 }
 .angle-zone {
   @apply mx-2 h-12 w-10 self-center cursor-pointer;
@@ -37,7 +37,7 @@ $mobile-margin: 160px;
   }
 }
 .photo-zone {
-  @apply h-56 w-56 rounded-full overflow-hidden;
+  @apply w-56 rounded-full overflow-hidden;
   border: 1px solid #ccc;
 }
 .ref-control {
@@ -85,7 +85,7 @@ $mobile-margin: 160px;
 .info {
   @apply py-8;
   div {
-    @apply my-2;
+    @apply mb-3;
   }
 }
 
@@ -96,8 +96,11 @@ $mobile-margin: 160px;
 }
 
 @include media(tablet, mid-tablet, mobile) {
+  .card-inner {
+    @apply h-40;
+  }
   .photo-zone {
-    @apply h-40 w-40;
+    @apply w-40;
   }
   .ref-control {
     &.i-0 {

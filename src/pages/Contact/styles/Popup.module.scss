@@ -1,18 +1,78 @@
+@font-face {
+  font-family: 'Youtube-Font';
+  src: url('~/assets/font/YoutubeSansBlack.otf');
+}
+@font-face {
+  font-family: 'KR-Font-BB';
+  src: url('~/assets/font/NotoSansKR-Black.ttf');
+}
+@font-face {
+  font-family: 'KR-Font-B';
+  src: url('~/assets/font/NotoSansKR-Bold.ttf');
+}
+
 .bg {
   @apply top-0 left-0 w-screen h-screen absolute flex justify-center items-center bg-black bg-opacity-30;
   z-index: 10;
 }
 
 .popup {
-  @apply rounded-xl w-1/2 bg-white opacity-100 p-4;
+  @apply rounded-xl w-1/4 bg-white opacity-100 p-4;
   z-index: 11;
   box-shadow: 0 0 24px 12px var(--paper-dialog-shadow-color, rgba(0, 0, 0, 0.15));
 }
 .header {
-  font-family: Youtube-Font;
+  @apply pb-8 flex justify-between text-black;
+  font-family: 'KR-Font-BB';
 }
 .x-button-container {
   @apply self-end cursor-pointer;
   width: 18px;
   height: 18px;
+}
+.detail-area {
+  @apply text-sm mb-4;
+}
+.icon-container {
+  @apply inline-block h-6 w-6 align-middle mr-2;
+}
+.detail-header {
+  @apply pb-4 text-base;
+  font-family: 'KR-Font-B';
+}
+.detail-list {
+  @apply py-1;
+}
+.share-button {
+  @apply flex rounded-2xl bg-gray-100 px-2 py-1;
+  border: 1px solid none;
+  &:hover {
+    @apply bg-gray-200;
+  }
+  &.click-animation {
+    animation:
+      clicked-background linear 500ms,
+      clicked-border ease 1000ms;
+  }
+}
+
+@keyframes clicked-border {
+  0% {
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    border-color: rgba(0, 0, 0, 0.075);
+  }
+  100% {
+    border-color: none;
+  }
+}
+
+@keyframes clicked-background {
+  0% {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  100% {
+    background-color: unset;
+  }
 }

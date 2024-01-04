@@ -2,19 +2,28 @@
 @import './common';
 
 .project-wrapper {
+  @extend .player-content-wrapper;
   @apply grid grid-cols-2 gap-5;
 }
 
 .title {
-  @apply text-black font-bold ml-5;
+  @apply text-black font-bold ml-4 mb-4;
 }
 .period {
   @apply text-gray-500 text-xs font-semibold mr-5;
 }
 .description {
-  @apply text-black;
+  @apply text-black px-2;
 }
-
+.li {
+  @apply list-none text-sm text-black pl-4;
+  &::before {
+    content: '';
+    @apply rounded-full bg-black inline-block mr-2 -translate-y-1;
+    height: 2px;
+    width: 2px;
+  }
+}
 @include media(tablet, mobile) {
   .project-wrapper {
     @apply grid-cols-1;
