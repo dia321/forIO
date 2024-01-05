@@ -45,7 +45,7 @@
 }
 .share-button {
   @apply flex rounded-2xl bg-gray-100 px-2 py-1;
-  border: 1px solid none;
+  border: 1px solid transparent;
   &:hover {
     @apply bg-gray-200;
   }
@@ -70,9 +70,9 @@
 
 @keyframes clicked-background {
   0% {
-    background-color: rgba(0, 0, 0, 0.1);
+    @apply bg-gray-300;
   }
   100% {
-    background-color: unset;
+    @apply bg-gray-200;
   }
 }

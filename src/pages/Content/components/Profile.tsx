@@ -2,8 +2,26 @@ import dayjs from 'dayjs';
 import s from '../styles/Profile.module.scss';
 const Profile = () => {
   const career = [
-    { company: 'KB데이타시스템', from: '202201', to: dayjs(), li: ['포탈 개발함', 'React, Vue'] },
-    { company: '대보정보통신', from: '202010', to: '202112', li: ['SI 노가다함'] }
+    {
+      company: 'KB데이타시스템',
+      from: '202201',
+      to: dayjs(),
+      li: [
+        'LLM 중개 Platform Demo 개발',
+        'KB Saas Platform 고도화(계약, 정산, 미터링 기능 추가개발)',
+        'KB Saas Platform 개발'
+      ]
+    },
+    {
+      company: '대보정보통신',
+      from: '202010',
+      to: '202112',
+      li: [
+        '신한저축은행 비대면 대출 서비스 개선 프로젝트 참여',
+        'NH저축은행 모바일 뱅킹 고도화 프로젝트 참여',
+        'NH투자증권 홈페이지 리뉴얼 프로젝트 참여'
+      ]
+    }
   ];
   const careerPeriod = () => {
     const monthDiff = dayjs(career[0].to).diff(dayjs(career[career.length - 1].from), 'month');

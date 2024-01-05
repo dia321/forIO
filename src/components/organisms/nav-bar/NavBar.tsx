@@ -13,7 +13,7 @@ import styles from './NavBar.module.scss';
 
 import { Tooltip } from '@component/.';
 import { layoutState as loState, notificationState } from '@stores/layout';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { Search } from '@component/Search';
 import { layoutElementState } from '@stores/layout/selector';
 
@@ -35,7 +35,7 @@ const NavBar = () => {
   const [notificationPopupState, setNotificationPopupState] = useRecoilState(
     layoutElementState('notificationPopupVisible')
   );
-  const [, setSearchState] = useRecoilState(layoutElementState('searchVisible'));
+  const setSearchState = useSetRecoilState(layoutElementState('searchVisible'));
   const [sideMenuState, setSideMenuState] = useRecoilState(layoutElementState('sideMenuExpanded'));
   const [layoutState] = useRecoilState(loState);
   const [noteCountState, setNoteCountState] = useState(0);
@@ -122,9 +122,7 @@ const NavBar = () => {
     for (const n of noteState.note) if (n.on) count++;
     setNoteCountState(count);
   }, [noteState]);
-  useEffect(() => {
-    console.log(`is it focused?? ${focused}`, layoutState);
-  }, [layoutState]);
+
   return (
     <>
       <div className={styles['nav-bar']}>

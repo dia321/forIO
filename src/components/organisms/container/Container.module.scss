@@ -4,7 +4,6 @@
 .container {
   @apply w-full;
   padding-top: $navbar-height;
-  padding-bottom: $mobile-menu-height;
   padding-left: $shrinked-menu-width;
   &.expanded {
     padding-left: $expanded-menu-width;
@@ -12,6 +11,7 @@
 }
 @include media(mobile, tablet, mid-tablet) {
   .container {
+    padding-bottom: $mobile-menu-height;
     @apply pl-0;
     &.expanded {
       @apply pl-0;

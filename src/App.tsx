@@ -1,4 +1,4 @@
-import { useRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import './App.css';
 // import { AppRouter } from './AppRouter';
@@ -11,13 +11,14 @@ import Content from './pages/Content/components/Content';
 import About from './pages/About/components/About';
 import Contact from './pages/Contact/components/Contact';
 import Container from '@component/organisms/container/Container';
+import { PopAlert } from './components';
 
 function App() {
   //initial render
-  const [, setSize] = useRecoilState(layoutElementState('size'));
-  const [, setInfo] = useRecoilState(contentSelectorState('contentInfo'));
+  const setSize = useSetRecoilState(layoutElementState('size'));
+  const setInfo = useSetRecoilState(contentSelectorState('contentInfo'));
 
-  const [active] = useRecoilState(activeState);
+  const active = useRecoilValue(activeState);
   let timer: ReturnType<typeof setTimeout>;
   useEffect(() => {
     const sizeChecker = () => {
@@ -86,6 +87,7 @@ function App() {
       <YoutubeLayout />
       {/* <AppRouter /> */}
       <Container>{active === 0 ? <Content /> : active === 1 ? <About /> : <Contact />}</Container>
+      <PopAlert />
     </>
   );
 }

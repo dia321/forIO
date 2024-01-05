@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import s from './NotificationPopup.module.scss';
 import { notificationState } from '@stores/layout';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import XButtonBlackIcon from '@assets/x-button-black-icon.svg?react';
 import smPhoto from '@assets/sm.jpg';
 import ThreeDotIcon from '@assets/three-dot-icon.svg?react';
@@ -11,7 +11,7 @@ import { EventTargetWithId } from '@type';
 import { layoutElementState } from '@stores/layout/selector';
 
 const NotificationPopup = () => {
-  const [, setNotificationPopupState] = useRecoilState(
+  const setNotificationPopupState = useSetRecoilState(
     layoutElementState('notificationPopupVisible')
   );
   const [noteState, setNoteState] = useRecoilState(notificationState);

@@ -1,20 +1,18 @@
-import { atom, RecoilState } from 'recoil';
-
-export type LayoutState = RecoilState<{
-  sideMenuExpanded: boolean;
-  notificationPopupVisible: boolean;
-  position: { x: number; y: number };
-  size: string;
-}>;
+import { atom } from 'recoil';
 
 export const layoutState = atom({
   key: 'layout',
   default: {
     sideMenuExpanded: true,
     notificationPopupVisible: false,
+    channelInfoPopupVisible: false,
     searchVisible: false,
     position: { x: 0, y: 0 },
-    size: 'laptop'
+    size: 'laptop',
+    popAlert: {
+      visible: false,
+      content: ''
+    }
   }
 });
 

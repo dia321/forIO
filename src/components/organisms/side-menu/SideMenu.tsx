@@ -6,8 +6,7 @@ import ShortsIcon from '@assets/shorts-icon.svg?react';
 import ShortsBlackIcon from '@assets/shorts-black-icon.svg?react';
 import SubscribeIcon from '@assets/subscribe-icon.svg?react';
 import SubscribeBlackIcon from '@assets/subscribe-black-icon.svg?react';
-import { useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { activeState, menuListState } from '@stores/menu';
 
 interface SideMenuProps {
@@ -21,7 +20,7 @@ const IconWrapper = styled.div``;
 const SideMenu = (sideMenuProps: SideMenuProps) => {
   const { expanded = true } = sideMenuProps;
 
-  const [menuList] = useRecoilState(menuListState);
+  const menuList = useRecoilValue(menuListState);
   const [active, setActive] = useRecoilState(activeState);
 
   const handleClick = (idx: number) => {

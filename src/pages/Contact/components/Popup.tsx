@@ -6,7 +6,9 @@ import VideoIcon from '@assets/video-icon.svg?react';
 import ViewIcon from '@assets/view-icon.svg?react';
 import InfoIcon from '@assets/info-icon.svg?react';
 import ShareIcon from '@assets/share-icon.svg?react';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { layoutElementState } from '@stores/layout';
 
 interface PopupProps {
   handleClickX: () => void;
@@ -15,6 +17,9 @@ interface PopupProps {
 const Popup = (props: PopupProps) => {
   const { handleClickX } = props;
   const [animation, setAnimation] = useState(false);
+  const setPopupVisible = useSetRecoilState(layoutElementState('channelInfoPopupVisible'));
+  const setPopAlert = useSetRecoilState(layoutElementState('popAlert'));
+  const popupRef = useRef<HTMLDivElement | null>(null);
 
   const detail = [
     { icon: <GlobeIcon />, text: 'dia321.github.io' },
@@ -24,10 +29,22 @@ const Popup = (props: PopupProps) => {
     { icon: <InfoIcon />, text: '생년월일: 1991. 11. 18.' }
   ];
 
+  useEffect(() => {
+    const handleBackgroundClick = (e: MouseEvent) => {
+      if (popupRef.current && !popupRef.current.contains(e.target as Node)) {
+        setPopupVisible(false);
+      }
+    };
+    document.addEventListener('click', handleBackgroundClick);
+
+    return () => {
+      document.removeEventListener('click', handleBackgroundClick);
+    };
+  }, []);
   return (
     <>
       <div className={s['bg']}>
-        <div className={s['popup']}>
+        <div className={s['popup']} ref={popupRef}>
           <div className={s['header']}>
             <div className={s['header-title']}>정보</div>
             <div className={s['x-button-container']} onClick={handleClickX}>
@@ -52,6 +69,8 @@ const Popup = (props: PopupProps) => {
             onClick={() => {
               if (animation) setAnimation(false);
               setTimeout(() => setAnimation(true), 10);
+              navigator.clipboard.writeText('dia321.github.io');
+              setPopAlert({ visible: true, content: '사이트 주소가 클립보드에 복사되었습니다.' });
             }}
           >
             <div className={s['icon-container']}>

@@ -1,0 +1,21 @@
+.pop-alert {
+  @apply bg-black rounded-lg sticky left-2 text-white px-4 py-2 break-words text-sm bottom-4;
+  max-width: 300px;
+}
+
+.visible {
+  @apply block;
+  animation: pop-animation ease-in 2s;
+}
+
+@keyframes pop-animation {
+  0% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

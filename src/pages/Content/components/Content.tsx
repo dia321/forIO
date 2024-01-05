@@ -1,4 +1,4 @@
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import s from '../styles/Content.module.scss';
 
 import profileImage from '@assets/profile-image.png';
@@ -20,9 +20,9 @@ const Content = () => {
     { content: 'toy', name: '개인 프로젝트' }
   ];
 
-  const [, setVisible] = useRecoilState(contentSelectorState('visible'));
+  const setVisible = useSetRecoilState(contentSelectorState('visible'));
   const [appear, setAppear] = useRecoilState(contentSelectorState('appear'));
-  const [, setType] = useRecoilState(contentSelectorState('type'));
+  const setType = useSetRecoilState(contentSelectorState('type'));
   const info = useRecoilValue(contentSelectorState('contentInfo')) as {
     views: string;
     time: string;

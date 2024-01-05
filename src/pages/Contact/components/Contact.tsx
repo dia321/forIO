@@ -8,6 +8,8 @@ import AngleRightIcon from '@assets/angle-right-icon.svg?react';
 import ThinAngleRightIcon from '@assets/thin-angle-right-icon.svg?react';
 import { Fragment, useEffect, useRef, useState } from 'react';
 import Popup from './Popup';
+import { useRecoilState } from 'recoil';
+import { layoutElementState } from '@stores/layout';
 
 const Contact = () => {
   const photoRef = useRef<HTMLDivElement>(null);
@@ -17,8 +19,9 @@ const Contact = () => {
     direction: '',
     idx: 0
   });
-  const [popup, setPopup] = useState(false);
-  const handlePopup = () => {
+  const [popup, setPopup] = useRecoilState(layoutElementState('channelInfoPopupVisible'));
+  const handlePopup = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setPopup(true);
   };
   const handleClickX = () => {
@@ -31,6 +34,7 @@ const Contact = () => {
         setSlide({ ...slide, ing: false });
       }, 300);
   }, [slide.ing]);
+
   return (
     <div className={s['contact']}>
       {popup && <Popup handleClickX={handleClickX} />}

@@ -1,6 +1,6 @@
 import TimePastIcon from '@assets/time-past-icon.svg?react';
 import s from './Search.module.scss';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { contentState as ctState } from '@stores/content';
 
 interface SearchProps {
@@ -9,7 +9,7 @@ interface SearchProps {
 
 export const Search = (props: SearchProps) => {
   const { suggestions } = props;
-  const [, setContentState] = useRecoilState(ctState);
+  const setContentState = useSetRecoilState(ctState);
 
   return (
     <div className={s['search-wrapper']}>
