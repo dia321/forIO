@@ -1,17 +1,13 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-
 import './App.css';
-// import { AppRouter } from './AppRouter';
-import { YoutubeLayout } from '@component/templates/YoutubeLayout';
+
 import { useEffect } from 'react';
-import { layoutElementState } from '@stores/layout';
-import { contentSelectorState } from '@stores/content/selector';
-import { activeState } from '@stores/menu';
+import { layoutElementState, contentSelectorState, activeState } from '@stores/.';
+import { PopAlert, YoutubeLayout, Container } from '@component/.';
+
 import Content from './pages/Content/components/Content';
 import About from './pages/About/components/About';
 import Contact from './pages/Contact/components/Contact';
-import Container from '@component/organisms/container/Container';
-import { PopAlert } from './components';
 
 function App() {
   //initial render
