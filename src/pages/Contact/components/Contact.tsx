@@ -1,8 +1,8 @@
 import s from '../styles/Contact.module.scss';
 import smPhoto from '@assets/sm.jpg';
-import exPhoto1 from '@assets/project-image.png';
-import exPhoto2 from '@assets/skill-image.png';
-import exPhoto3 from '@assets/profile-image.png';
+import smPhoto1 from '@assets/sm2.jpg';
+import smPhoto2 from '@assets/sm3.jpg';
+import smPhoto3 from '@assets/sm4.jpg';
 import AngleLeftIcon from '@assets/angle-left-icon.svg?react';
 import AngleRightIcon from '@assets/angle-right-icon.svg?react';
 import ThinAngleRightIcon from '@assets/thin-angle-right-icon.svg?react';
@@ -13,7 +13,7 @@ import { layoutElementState } from '@stores/layout';
 
 const Contact = () => {
   const photoRef = useRef<HTMLDivElement>(null);
-  const photoList = [smPhoto, exPhoto1, exPhoto2, exPhoto3, smPhoto];
+  const photoList = [smPhoto, smPhoto1, smPhoto2, smPhoto3, smPhoto];
   const [slide, setSlide] = useState({
     ing: false,
     direction: '',
@@ -76,7 +76,7 @@ const Contact = () => {
         </div>
         <div className={s['info']}>
           <div className="text-4xl font-bold text-black">김성민</div>
-          <div className={s['description']}>@breadmie5064 · 구독자 5명 · 동영상 4개</div>
+          <div className={s['description']}>@Frontend Developer</div>
           <div className={`${s['description']} flex cursor-pointer`} onClick={handlePopup}>
             채널 자세히 알아보기 <ThinAngleRightIcon className="h-6" />
           </div>

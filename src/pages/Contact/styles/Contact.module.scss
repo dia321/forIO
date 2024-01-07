@@ -37,11 +37,13 @@ $mobile-margin: 160px;
   }
 }
 .photo-zone {
-  @apply w-56 rounded-full overflow-hidden;
+  @apply rounded-full overflow-hidden;
+  width: $pc-margin;
   border: 1px solid #ccc;
 }
 .ref-control {
-  @apply flex h-full w-full;
+  @apply flex h-full;
+  width: $pc-margin;
   &.i-0 {
     &.left {
       animation: lslide0 linear 0.3s;
@@ -100,9 +102,10 @@ $mobile-margin: 160px;
     @apply h-40;
   }
   .photo-zone {
-    @apply w-40;
+    width: $mobile-margin;
   }
   .ref-control {
+    width: $mobile-margin;
     &.i-0 {
       &.left {
         animation: mobile-lslide0 linear 0.3s;

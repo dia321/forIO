@@ -52,7 +52,28 @@ const NavBar = () => {
     'Tech Stack',
     'Project',
     'Project experience',
-    'Tech'
+    'Tech',
+    '경력',
+    '학력',
+    '자격증',
+    '언어',
+    '프로그래밍 언어',
+    'language',
+    '프레임워크',
+    'framework',
+    '라이브러리',
+    'library',
+    '마크업',
+    'Html',
+    'css',
+    'markup',
+    '툴',
+    'Tool',
+    '경험',
+    '참여 프로젝트',
+    '개인 프로젝트',
+    '토이 프로젝트',
+    'toy project'
   ];
   const [suggestions, setSuggestions] = useState<string[]>(searchList.slice(0, 8));
 
@@ -198,6 +219,7 @@ const NavBar = () => {
                 className={`${styles['speak-icon-container']}`}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
+                onClick={() => alert('soon')}
                 id="speak"
               >
                 <SpeackIcon />
