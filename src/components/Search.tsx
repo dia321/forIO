@@ -1,25 +1,14 @@
 import TimePastIcon from '@assets/time-past-icon.svg?react';
 import s from './Search.module.scss';
-import { useSetRecoilState } from 'recoil';
-import { contentState as ctState } from '@stores/content';
 import React from 'react';
 
 interface SearchProps {
   suggestions?: string[];
-}
-interface EventTargetWithId extends EventTarget  {
-  id: string
+  // eslint-disable-next-line no-unused-vars
+  handleClickSuggestion: (e: React.MouseEvent) => void;
 }
 export const Search = (props: SearchProps) => {
-  const { suggestions } = props;
-  const setContentState = useSetRecoilState(ctState);
-
-  const handleClickSuggestion = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    const et = e.currentTarget as EventTargetWithId;
-    console.log(et.id);
-    // setContentState((prev) => ({ ...prev, visible: true, appear: true }))
-  }
+  const { suggestions, handleClickSuggestion } = props;
 
   return (
     <div className={s['search-wrapper']}>

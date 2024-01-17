@@ -14,6 +14,7 @@ import styles from './NavBar.module.scss';
 import { Tooltip } from '@component/.';
 import { layoutState as loState, notificationState } from '@stores/layout';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { contentState as ctState } from '@stores/content';
 import { Search } from '@component/Search';
 import { layoutElementState } from '@stores/layout/selector';
 
@@ -36,6 +37,7 @@ const NavBar = () => {
     layoutElementState('notificationPopupVisible')
   );
   const setSearchState = useSetRecoilState(layoutElementState('searchVisible'));
+  const setContentState = useSetRecoilState(ctState);
   const [sideMenuState, setSideMenuState] = useRecoilState(layoutElementState('sideMenuExpanded'));
   const [layoutState] = useRecoilState(loState);
   const [noteCountState, setNoteCountState] = useState(0);
@@ -75,6 +77,30 @@ const NavBar = () => {
     '토이 프로젝트',
     'toy project'
   ];
+  const profile = ['Profile', '프로필', '개인정보', '경력', '학력', '자격증'];
+  const skills = [
+    '기술',
+    '기술 스택',
+    'Skill',
+    'Stack',
+    'Tech Stack',
+    'Tech',
+    '프로그래밍 언어',
+    '언어',
+    'language',
+    '프레임워크',
+    'framework',
+    '라이브러리',
+    'library',
+    '마크업',
+    'Html',
+    'css',
+    'markup',
+    '툴',
+    'Tool'
+  ];
+  const projects = ['Project', 'Project experience', '경험', '참여 프로젝트'];
+  // const toy = ['개인 프로젝트', '토이 프로젝트', 'toy project'];
   const [suggestions, setSuggestions] = useState<string[]>(searchList.slice(0, 8));
 
   const handleMouseEnter: React.MouseEventHandler = (e) => {
@@ -100,7 +126,6 @@ const NavBar = () => {
   const handleInputClick = (e: MouseEvent) => {
     e.stopPropagation();
     const { id } = e.target as EventTargetWithId;
-    console.log(id, 'handleInputCLick');
     if (
       (inputRef.current && inputRef.current.contains(e.target as Node)) ||
       id === 'search-input-area' ||
@@ -125,6 +150,24 @@ const NavBar = () => {
     setSuggestions(filteredSuggestions.slice(0, 8));
   };
 
+  const handleClickSuggestion = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const et = e.currentTarget as EventTargetWithId;
+
+    setContentState((prev) => ({
+      ...prev,
+      visible: true,
+      appear: true,
+      type: profile.includes(et.id)
+        ? 'Profile'
+        : skills.includes(et.id)
+        ? 'Skills'
+        : projects.includes(et.id)
+        ? '참여 프로젝트'
+        : '개인 프로젝트'
+    }));
+  };
+
   const handleNotificationClick: React.MouseEventHandler = (e) => {
     e.stopPropagation();
     setNotificationPopupState(!notificationPopupState);
@@ -132,10 +175,12 @@ const NavBar = () => {
   useEffect(() => {
     // 컴포넌트가 마운트될 때 document에 클릭 이벤트 리스너 추가
     document.addEventListener('click', handleInputClick);
+    document.addEventListener('keydown', () => {});
 
     return () => {
       // 컴포넌트가 언마운트될 때 클릭 이벤트 리스너 제거
       document.removeEventListener('click', handleInputClick);
+      document.removeEventListener('keydown', () => {});
     };
   }, []);
   useEffect(() => {
@@ -201,7 +246,9 @@ const NavBar = () => {
                   />
                 </a>
               </div>
-              {layoutState.searchVisible && <Search suggestions={suggestions} />}
+              {layoutState.searchVisible && (
+                <Search suggestions={suggestions} handleClickSuggestion={handleClickSuggestion} />
+              )}
             </div>
             <div
               className={styles['search-button-container']}
