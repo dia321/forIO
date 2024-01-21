@@ -2,7 +2,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import s from '../styles/Player.module.scss';
 import XButtonIcon from '@assets/x-button-icon.svg?react';
 import ClipIcon from '@assets/clip-icon.svg?react';
-import { useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import { contentSelectorState } from '@stores/content/selector';
 import Profile from './Profile';
 import Skills from './Skills';
@@ -22,6 +22,17 @@ export const Player = () => {
     }
   };
 
+  const handleClickDownload = () => {
+    const downloadUrl = import.meta.env.VITE_URL + 'public/introducingmyself.pptx';
+    console.log(downloadUrl);
+    const link = document.createElement('a');
+    link.href = downloadUrl;
+    link.download = '김성민_자기소개서.pptx';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div
       className={`${s['player-area']} 
@@ -33,13 +44,13 @@ export const Player = () => {
         <div className={s['description']}>
           {type === 'Profile' && (
             <>
-              상세한 경력기술서는
+              추가적으로 확인하실 부분은
               {
-                <span className={s['file-download']}>
+                <span className={s['file-download']} onClick={handleClickDownload}>
                   <span className={s['icon-container']}>
                     <ClipIcon />
                   </span>
-                  <span className={s['file-name']}>경력기술서</span>
+                  <span className={s['file-name']}>자기소개서</span>
                 </span>
               }
               를 확인해주세요
