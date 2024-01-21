@@ -4,18 +4,18 @@ import s from '../styles/Project.module.scss';
 const Project = () => {
   const projects = [
     {
-      title: 'LLM Data Readiness Demo 개발',
+      title: 'LLM Platform MVP 기능 개선 개발',
       period: '2024. 01 ~ 진행중',
       description: [
-        '사내 지식 데이터를 벡터DB에 모아둔 후 해당 데이터를 통한 RAG 기능 제공 Demo 개발'
+        '사내 지식 데이터를 벡터DB에 모아둔 후 해당 데이터를 통한 RAG 기능을 추가한 서비스 제공'
       ],
       corp: 'KB데이타시스템'
     },
     {
-      title: 'LLM 채팅 중개 플랫폼 Demo 개발',
+      title: 'LLM Chat 및 검색증강생성 Chat 중개 Platform MVP 개발',
       period: '2023. 11 ~ 2023. 12',
       description: [
-        'ChatGPT 3.5, ChatGPT 3.5-16k, ChatGPT 4, DALL·E 3 등 LLM 모델을 선택하여 LLM 채팅과 이미지 생성 가능한 데모 페이지 개발',
+        'ChatGPT 3.5, ChatGPT 3.5-16k, ChatGPT 4, DALL·E 3 등 LLM 모델을 선택하여 LLM 채팅과 이미지 생성 가능한 Platform의 MVP 개발',
         '사용자가 업로드한 pdf 파일 기반의 검색증강생성(RAG) 기능 제공',
         'Vite 환경으로 구성한 React-ts 프로젝트, Recoil과 React query를 사용하여 상태 관리'
       ],

@@ -1,0 +1,17 @@
+@import '~/styles/mixin';
+
+.about {
+  @apply px-8 py-4;
+}
+.youtube-container {
+  @apply w-1/2 mx-auto;
+}
+.frame {
+  @apply my-auto;
+}
+
+@include media(tablet, mobile) {
+  .youtube-container {
+    @apply w-full;
+  }
+}
