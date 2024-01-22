@@ -17,6 +17,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { contentState as ctState } from '@stores/content';
 import { Search } from '@component/Search';
 import { layoutElementState } from '@stores/layout/selector';
+import { activeState } from '@stores/menu';
 
 interface EventTargetWithId extends EventTarget {
   id: string;
@@ -38,6 +39,7 @@ const NavBar = () => {
   );
   const setSearchState = useSetRecoilState(layoutElementState('searchVisible'));
   const setContentState = useSetRecoilState(ctState);
+  const setActive = useSetRecoilState(activeState);
   const [sideMenuState, setSideMenuState] = useRecoilState(layoutElementState('sideMenuExpanded'));
   const [layoutState] = useRecoilState(loState);
   const [noteCountState, setNoteCountState] = useState(0);
@@ -152,6 +154,7 @@ const NavBar = () => {
 
   const handleClickSuggestion = (e: React.MouseEvent) => {
     e.stopPropagation();
+    setActive(0);
     const et = e.currentTarget as EventTargetWithId;
 
     setContentState((prev) => ({
@@ -202,7 +205,12 @@ const NavBar = () => {
               <BurgerIcon />
             </div>
           </div>
-          <div className="flex cursor-pointer">
+          <div
+            className="flex cursor-pointer"
+            onClick={() => {
+              setActive(0);
+            }}
+          >
             <img src={smPhoto} className={styles['photo']} />
             <NameLogo />
             <span className={styles['korea']}>KR</span>
@@ -307,7 +315,9 @@ const NavBar = () => {
               <Tooltip content="알림" visible={tooltipVisible.notification} />
             )}
           </div>
-          <div className={styles['user-container']}>b</div>
+          <div className={styles['user-container']} onClick={() => setActive(2)}>
+            b
+          </div>
           <div className={styles['responsive-search-container']} onClick={() => handleInputClick}>
             <div className={styles['responsive-search-icon-container']}>
               <SearchIcon id="responsive-search-icon" />
