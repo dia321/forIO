@@ -12,7 +12,7 @@ import BackArrowIcon from '@assets/back-arrow-icon.svg?react';
 import styles from './NavBar.module.scss';
 
 import { Tooltip } from '@component/.';
-import { layoutState as loState, notificationState } from '@stores/layout';
+import { notificationState } from '@stores/layout';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { contentState as ctState } from '@stores/content';
 import { Search } from '@component/Search';
@@ -37,11 +37,12 @@ const NavBar = () => {
   const [notificationPopupState, setNotificationPopupState] = useRecoilState(
     layoutElementState('notificationPopupVisible')
   );
-  const setSearchState = useSetRecoilState(layoutElementState('searchVisible'));
   const setContentState = useSetRecoilState(ctState);
   const setActive = useSetRecoilState(activeState);
   const [sideMenuState, setSideMenuState] = useRecoilState(layoutElementState('sideMenuExpanded'));
-  const [layoutState] = useRecoilState(loState);
+  const [searchVisible, setSearchVisible] = useRecoilState(layoutElementState('searchVisible'));
+  const [searchHover, setSearchHover] = useState(-1);
+  const windowSize = useRecoilValue(layoutElementState('size'));
   const [noteCountState, setNoteCountState] = useState(0);
   const noteState = useRecoilValue(notificationState);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -137,10 +138,10 @@ const NavBar = () => {
       // 클릭 이벤트가 input 요소 외부에서 발생한 경우
       inputRef.current?.focus();
       setFocused(true);
-      setSearchState(true);
+      setSearchVisible(true);
     } else {
       setFocused(false);
-      setSearchState(false);
+      setSearchVisible(false);
     }
   };
   const handleInputChange: React.ChangeEventHandler = (e) => {
@@ -170,20 +171,41 @@ const NavBar = () => {
         : '개인 프로젝트'
     }));
   };
+  const handleMouseOver = (idx: number) => {
+    setSearchHover(idx);
+  };
 
   const handleNotificationClick: React.MouseEventHandler = (e) => {
     e.stopPropagation();
     setNotificationPopupState(!notificationPopupState);
   };
+  const keydownOnSearch = (e: KeyboardEvent) => {
+    if (focused) {
+      if (e.key === 'ArrowDown') {
+        setSearchHover((prev) => (prev + 1 >= suggestions.length ? 0 : prev + 1));
+      } else if (e.key === 'ArrowUp') {
+        setSearchHover((prev) => (prev - 1 < 0 ? suggestions.length - 1 : prev - 1));
+      }
+    }
+  };
+  const handleEnterPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      const event = {
+        currentTarget: { id: suggestions[searchHover] },
+        stopPropagation: () => {}
+      } as unknown as React.MouseEvent;
+      handleClickSuggestion(event);
+    }
+  };
   useEffect(() => {
     // 컴포넌트가 마운트될 때 document에 클릭 이벤트 리스너 추가
     document.addEventListener('click', handleInputClick);
-    document.addEventListener('keydown', () => {});
+    document.addEventListener('keydown', keydownOnSearch);
 
     return () => {
       // 컴포넌트가 언마운트될 때 클릭 이벤트 리스너 제거
       document.removeEventListener('click', handleInputClick);
-      document.removeEventListener('keydown', () => {});
+      document.removeEventListener('keydown', keydownOnSearch);
     };
   }, []);
   useEffect(() => {
@@ -191,7 +213,9 @@ const NavBar = () => {
     for (const n of noteState.note) if (n.on) count++;
     setNoteCountState(count);
   }, [noteState]);
-
+  useEffect(() => {
+    if (!searchVisible) setSearchHover(-1);
+  }, [searchVisible]);
   return (
     <>
       <div className={styles['nav-bar']}>
@@ -246,6 +270,7 @@ const NavBar = () => {
                   onFocus={() => setFocused(true)}
                   ref={inputRef}
                   onChange={handleInputChange}
+                  onKeyDown={handleEnterPress}
                 />
                 <a href="" className="p-1">
                   <img
@@ -254,8 +279,13 @@ const NavBar = () => {
                   />
                 </a>
               </div>
-              {layoutState.searchVisible && (
-                <Search suggestions={suggestions} handleClickSuggestion={handleClickSuggestion} />
+              {searchVisible && (
+                <Search
+                  suggestions={suggestions}
+                  handleClickSuggestion={handleClickSuggestion}
+                  hoverIdx={searchHover}
+                  handleMouseOver={handleMouseOver}
+                />
               )}
             </div>
             <div
@@ -285,7 +315,7 @@ const NavBar = () => {
         </div>
         <div
           className={`${styles['partition']} ${styles['shortcut-container']} ${
-            layoutState.size !== 'laptop' ? (focused ? styles['input-focused'] : '') : ''
+            windowSize !== 'laptop' ? (focused ? styles['input-focused'] : '') : ''
           }`}
         >
           <div
@@ -311,7 +341,7 @@ const NavBar = () => {
               <NotificationIcon />
             </div>
             {noteCountState > 0 && <span className={styles['red']}>{noteCountState}</span>}
-            {layoutState.size === 'laptop' && (
+            {windowSize === 'laptop' && (
               <Tooltip content="알림" visible={tooltipVisible.notification} />
             )}
           </div>

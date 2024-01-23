@@ -10,7 +10,7 @@
   .record-container {
     @apply px-4 py-2 flex cursor-pointer;
     height: 36px;
-    &:hover {
+    &[data-hovering='true'] {
       background-color: $basic-background-color;
     }
     .icon-container {
