@@ -2,7 +2,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import s from '../styles/Player.module.scss';
 import XButtonIcon from '@assets/x-button-icon.svg?react';
 import ClipIcon from '@assets/clip-icon.svg?react';
-import { useCallback, useRef } from 'react';
+import { useRef } from 'react';
 import { contentSelectorState } from '@stores/content/selector';
 import Profile from './Profile';
 import Skills from './Skills';
@@ -23,7 +23,7 @@ export const Player = () => {
   };
 
   const handleClickDownload = () => {
-    const downloadUrl = import.meta.env.VITE_URL + 'public/introducingmyself.pptx';
+    const downloadUrl = import.meta.env.VITE_URL + 'download/introducingmyself.pptx';
     console.log(downloadUrl);
     const link = document.createElement('a');
     link.href = downloadUrl;
