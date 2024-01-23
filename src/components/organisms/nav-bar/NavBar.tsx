@@ -146,6 +146,7 @@ const NavBar = () => {
   };
   const handleInputChange: React.ChangeEventHandler = (e) => {
     const { value } = e.target as unknown as EventTargetWithValue;
+    if (!focused) setFocused(true);
 
     const filteredSuggestions = searchList.filter((item) =>
       item.toLowerCase().includes(value.toLowerCase())
@@ -179,8 +180,41 @@ const NavBar = () => {
     e.stopPropagation();
     setNotificationPopupState(!notificationPopupState);
   };
-  const keydownOnSearch = (e: KeyboardEvent) => {
-    if (focused) {
+  const handleClickSearch = () => {
+    if (inputRef.current) {
+      if (inputRef.current && !inputRef.current.value) {
+        alert('검색어를 입력해주세요');
+        return;
+      }
+      const filteredSuggestions = searchList.filter((item) => {
+        if (inputRef.current)
+          return item.toLowerCase().includes(inputRef.current.value.toLowerCase());
+        else return '';
+      });
+      if (!filteredSuggestions.length) {
+        alert('연관 검색어가 나오도록 입력해주시면 감사드리겠습니다.');
+        return;
+      } else {
+        const event = {
+          currentTarget: { id: suggestions[searchHover === -1 ? 0 : searchHover] },
+          stopPropagation: () => {}
+        } as unknown as React.MouseEvent;
+        handleClickSuggestion(event);
+      }
+    }
+  };
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      if (!suggestions.length) {
+        alert('연관 검색어가 나오도록 입력해주시면 감사드리겠습니다.');
+        return;
+      }
+      const event = {
+        currentTarget: { id: suggestions[searchHover === -1 ? 0 : searchHover] },
+        stopPropagation: () => {}
+      } as unknown as React.MouseEvent;
+      handleClickSuggestion(event);
+    } else if (focused) {
       if (e.key === 'ArrowDown') {
         setSearchHover((prev) => (prev + 1 >= suggestions.length ? 0 : prev + 1));
       } else if (e.key === 'ArrowUp') {
@@ -188,24 +222,13 @@ const NavBar = () => {
       }
     }
   };
-  const handleEnterPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      const event = {
-        currentTarget: { id: suggestions[searchHover] },
-        stopPropagation: () => {}
-      } as unknown as React.MouseEvent;
-      handleClickSuggestion(event);
-    }
-  };
   useEffect(() => {
     // 컴포넌트가 마운트될 때 document에 클릭 이벤트 리스너 추가
     document.addEventListener('click', handleInputClick);
-    document.addEventListener('keydown', keydownOnSearch);
 
     return () => {
       // 컴포넌트가 언마운트될 때 클릭 이벤트 리스너 제거
       document.removeEventListener('click', handleInputClick);
-      document.removeEventListener('keydown', keydownOnSearch);
     };
   }, []);
   useEffect(() => {
@@ -216,6 +239,9 @@ const NavBar = () => {
   useEffect(() => {
     if (!searchVisible) setSearchHover(-1);
   }, [searchVisible]);
+  useEffect(() => {
+    if (inputRef.current && searchHover !== -1) inputRef.current.value = suggestions[searchHover];
+  }, [searchHover]);
   return (
     <>
       <div className={styles['nav-bar']}>
@@ -270,7 +296,7 @@ const NavBar = () => {
                   onFocus={() => setFocused(true)}
                   ref={inputRef}
                   onChange={handleInputChange}
-                  onKeyDown={handleEnterPress}
+                  onKeyDown={handleKeyPress}
                 />
                 <a href="" className="p-1">
                   <img
@@ -293,6 +319,7 @@ const NavBar = () => {
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
               id="search"
+              onClick={handleClickSearch}
             >
               <div className={`${styles['search-icon-container']}`}>
                 <SearchIcon />
