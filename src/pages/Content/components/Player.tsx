@@ -2,7 +2,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import s from '../styles/Player.module.scss';
 import XButtonIcon from '@assets/x-button-icon.svg?react';
 import ClipIcon from '@assets/clip-icon.svg?react';
-import { useCallback, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { contentSelectorState } from '@stores/content/selector';
 import Profile from './Profile';
 import Skills from './Skills';
@@ -17,14 +17,12 @@ export const Player = () => {
 
   const handleBackgroundClick: React.MouseEventHandler = (e) => {
     if (popupRef.current && !popupRef.current.contains(e.target as Node)) {
-      setVisible(false);
-      setTimeout(() => setAppear(false), 500);
+      exit();
     }
   };
 
   const handleClickDownload = () => {
-    const downloadUrl = import.meta.env.VITE_URL + 'public/introducingmyself.pptx';
-    console.log(downloadUrl);
+    const downloadUrl = '/download/introducingmyself.pptx';
     const link = document.createElement('a');
     link.href = downloadUrl;
     link.download = '김성민_자기소개서.pptx';
@@ -33,6 +31,22 @@ export const Player = () => {
     document.body.removeChild(link);
   };
 
+  const exit = () => {
+    setVisible(false);
+    setTimeout(() => setAppear(false), 500);
+  };
+  useEffect(() => {
+    // 컴포넌트가 마운트될 때 document에 클릭 이벤트 리스너 추가
+    const escPress = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') exit();
+    };
+    document.addEventListener('keydown', escPress);
+
+    return () => {
+      // 컴포넌트가 언마운트될 때 클릭 이벤트 리스너 제거
+      document.removeEventListener('keydown', escPress);
+    };
+  }, []);
   return (
     <div
       className={`${s['player-area']} 
@@ -89,13 +103,7 @@ export const Player = () => {
             ''
           )}
         </div>
-        <div
-          className={s['x-button-container']}
-          onClick={() => {
-            setVisible(false);
-            setTimeout(() => setAppear(false), 500);
-          }}
-        >
+        <div className={s['x-button-container']} onClick={exit}>
           <XButtonIcon />
         </div>
       </div>

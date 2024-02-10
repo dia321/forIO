@@ -4,11 +4,14 @@ import React from 'react';
 
 interface SearchProps {
   suggestions?: string[];
+  hoverIdx: number;
   // eslint-disable-next-line no-unused-vars
   handleClickSuggestion: (e: React.MouseEvent) => void;
+  // eslint-disable-next-line no-unused-vars
+  handleMouseOver: (idx: number) => void;
 }
 export const Search = (props: SearchProps) => {
-  const { suggestions, handleClickSuggestion } = props;
+  const { suggestions, handleClickSuggestion, hoverIdx, handleMouseOver } = props;
 
   return (
     <div className={s['search-wrapper']}>
@@ -19,6 +22,8 @@ export const Search = (props: SearchProps) => {
             key={`search${i}`}
             onClick={handleClickSuggestion}
             id={suggestion}
+            onMouseOver={() => handleMouseOver(i)}
+            data-hovering={hoverIdx === i}
           >
             <div className={s['icon-container']}>
               <TimePastIcon />
