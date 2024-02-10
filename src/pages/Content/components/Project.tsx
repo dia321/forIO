@@ -13,7 +13,7 @@ const Project = () => {
     },
     {
       title: 'LLM Chat 및 검색증강생성 Chat 중개 Platform MVP 개발',
-      period: '2023. 11 ~ 2023. 12',
+      period: '2023. 10 ~ 2023. 12',
       description: [
         'ChatGPT 3.5, ChatGPT 3.5-16k, ChatGPT 4, DALL·E 3 등 LLM 모델을 선택하여 LLM 채팅과 이미지 생성 가능한 Platform의 MVP 개발',
         '사용자가 업로드한 pdf 파일 기반의 검색증강생성(RAG) 기능 제공',
