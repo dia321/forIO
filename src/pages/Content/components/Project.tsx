@@ -5,7 +5,7 @@ const Project = () => {
   const projects = [
     {
       title: 'LLM Platform MVP 기능 개선 개발',
-      period: '2024. 01 ~ 진행중',
+      period: '2024. 01 ~ 2024. 04',
       description: [
         '사내 지식 데이터를 벡터DB에 모아둔 후 해당 데이터를 통한 RAG 기능을 추가한 서비스 제공'
       ],
