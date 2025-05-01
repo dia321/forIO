@@ -7,7 +7,7 @@ const About = () => {
     <div className={s['about']}>
       <div className={s['youtube-container']}>
         <div className={s['frame']}>
-          <YouTube videoId="--VMOQiWqXQ" opts={{ width: '100%' }} />
+          <YouTube videoId="JHIE_oi_qOs" opts={{ width: '100%' }} />
         </div>
       </div>
     </div>

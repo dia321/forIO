@@ -19,18 +19,20 @@ const Skills = () => {
               <ol>
                 <li className={s['high']}>Javascript</li>
                 <li className={s['high']}>Typescript</li>
-                <li className={s['middle']}>Python</li>
                 <li className={s['low']}>Java</li>
+                <li className={s['low']}>Python</li>
+                <li className={s['low']}>SQL</li>
               </ol>
             </div>
             <div className={s['bundle']}>
               <div className={s['semi-classification']}>Framework / Library</div>
               <ol>
                 <li className={s['high']}>React - Recoil, React query, Mobx</li>
-                <li className={s['high']}>Vue - Vuex, Composition api</li>
+                <li className={s['high']}>Vue - Vue2, Vue3, Pinia, Vuex, Composition api</li>
+                <li className={s['high']}>jQuery, axios, alova</li>
                 <li className={s['middle']}>Webpack, Vite</li>
-                <li className={s['low']}>Django</li>
-                <li className={s['low']}>SpringBoot</li>
+                <li className={s['low']}>Spring, JPA, MyBatis</li>
+                <li className={s['low']}>Django</li>             
               </ol>
             </div>
             <div className={s['bundle']}>
@@ -58,6 +60,7 @@ const Skills = () => {
             <ol>
               <li>Git</li>
               <li>Jenkins</li>
+              <li>DBeaver</li>
               <li>Jira/Confluence</li>
               <li>Figma</li>
             </ol>

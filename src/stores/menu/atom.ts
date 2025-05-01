@@ -5,7 +5,7 @@ export const menuState = atom({
   default: {
     menuList: [
       { menu: 'home', name: 'Home' },
-      { menu: 'shorts', name: '볼거리' },
+      { menu: 'shorts', name: 'Hobby' },
       { menu: 'subscribe', name: 'Contact' }
     ],
     active: 0

@@ -4,6 +4,16 @@ import s from '../styles/Project.module.scss';
 const Project = () => {
   const projects = [
     {
+      title: '그룹공동 생성형AI 플랫폼 구축 프로젝트',
+      period: '2024. 08 ~ 2025. 04',
+      description: [
+        'KB금융그룹 계열사 대상 생성형AI플랫폼 관련 서비스(LLM 챗봇, LLM 모델 서빙, RAG 문서 파싱, AI 에이전트 제공)를 서빙하는 포털(사용자포털/어드민포털) 개발',
+        'Vue.js 프로젝트 환경 구축 (Vite – Vue.js 프로젝트, 상태관리 pinia, https통신 alova)',
+        '공통 컴포넌트 개발, 공통 util 및 커스텀 hook 개발'
+      ],
+      corp: 'KB데이타시스템'
+    },
+    {
       title: 'LLM Platform MVP 기능 개선 개발',
       period: '2024. 01 ~ 2024. 04',
       description: [
@@ -32,7 +42,7 @@ const Project = () => {
     },
     {
       title: 'KB SaaS Platform 개발',
-      period: '2022. 08 ~ 2023. 01',
+      period: '2022. 07 ~ 2023. 01',
       description: [
         'KB 계열사에 제공할 수 있는 SaaS 상품 포탈 개발',
         '기존의 서비스요청(SR) 관리 시스템의 백오피스 기능, SR 요청 기능을 그대로 활용하고 추가적으로 고객용 SaaS 상품 소개 페이지, 데모 신청 페이지 등을 추가',

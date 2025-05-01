@@ -2,12 +2,12 @@
 @import '~/styles/mixin';
 
 .content {
-  @apply px-8 py-4 grid grid-cols-3 gap-8;
+  @apply px-8 py-4 grid grid-cols-2 gap-16;
 }
 
 .card {
   @apply w-full cursor-pointer;
-  height: 290px;
+  height: $card-height;
   &:hover {
     .thumbnail {
       background-color: #efefef;

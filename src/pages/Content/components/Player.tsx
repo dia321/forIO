@@ -22,10 +22,10 @@ export const Player = () => {
   };
 
   const handleClickDownload = () => {
-    const downloadUrl = '/download/introducingmyself.pptx';
+    const downloadUrl = '/download/resume.pdf';
     const link = document.createElement('a');
     link.href = downloadUrl;
-    link.download = '김성민_자기소개서.pptx';
+    link.download = '김성민_이력서.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -64,7 +64,7 @@ export const Player = () => {
                   <span className={s['icon-container']}>
                     <ClipIcon />
                   </span>
-                  <span className={s['file-name']}>자기소개서</span>
+                  <span className={s['file-name']}>이력서</span>
                 </span>
               }
               를 확인해주세요

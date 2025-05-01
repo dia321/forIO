@@ -17,7 +17,7 @@ const Content = () => {
     { content: 'profile', name: 'Profile' },
     { content: 'skill', name: 'Skills' },
     { content: 'project', name: '참여 프로젝트' },
-    { content: 'toy', name: '개인 프로젝트' }
+    // { content: 'toy', name: '개인 프로젝트' }
   ];
 
   const setVisible = useSetRecoilState(contentSelectorState('visible'));

@@ -24,8 +24,8 @@ const Popup = (props: PopupProps) => {
   const detail = [
     { icon: <GlobeIcon />, text: 'dia321.github.io' },
     { icon: <SubscriberIcon />, text: '생년월일: 1991. 11. 18.' },
-    { icon: <VideoIcon />, text: '동영상 4개' },
-    { icon: <ViewIcon />, text: '방문수 142회' },
+    { icon: <VideoIcon />, text: '동영상 3개' },
+    { icon: <ViewIcon />, text: '방문수 142회' }
   ];
 
   useEffect(() => {
@@ -63,8 +63,11 @@ const Popup = (props: PopupProps) => {
               ))}
             </ol>
           </div>
-          <div className='text-xs mb-2 bg-orange-50'>
-            <span className='inline-block h-4 w-4 align-middle mr-1'><InfoIcon /></span>문의 또는 버그제보는 010-2054-2959로 연략 부탁드립니다.
+          <div className="text-xs mb-2 bg-orange-50">
+            <span className="inline-block h-4 w-4 align-middle mr-1">
+              <InfoIcon />
+            </span>
+            문의 또는 버그제보는 010-2054-2959로 연략 부탁드립니다.
           </div>
           <button
             className={`${s['share-button']} ${animation ? s['click-animation'] : ''}`}

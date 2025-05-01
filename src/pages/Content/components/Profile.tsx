@@ -6,7 +6,7 @@ const Profile = () => {
       company: 'KB데이타시스템',
       from: '202201',
       to: dayjs(),
-      li: ['LLM Platform MVP 개발', 'KB Saas Platform 개발 및 고도화, 운영']
+      li: ['그룹공동 생성형AI플랫폼 구축 프로젝트 참여','LLM Platform MVP 개발', 'KB Saas Platform 개발 및 고도화, 운영']
     },
     {
       company: '대보정보통신',
