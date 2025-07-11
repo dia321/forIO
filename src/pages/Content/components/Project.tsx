@@ -4,6 +4,15 @@ import s from '../styles/Project.module.scss';
 const Project = () => {
   const projects = [
     {
+      title: '그룹공동 생성형AI 플랫폼 운영 및 결재 프로세스 개선',
+      period: '2025. 05 ~ 진행중',
+      description: [
+        '생성형AI플랫폼 운영(문의 대응 및 오류 수정, 개선)',
+        '플랫폼 내 작업실 및 과제 생성 시 결재 프로세스 변경에 따른 개선 개발'
+      ],
+      corp: 'KB데이타시스템'
+    },
+    {
       title: '그룹공동 생성형AI 플랫폼 구축 프로젝트',
       period: '2024. 08 ~ 2025. 04',
       description: [
